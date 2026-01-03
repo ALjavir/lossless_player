@@ -9,6 +9,7 @@ class SongModel {
   final int duration;
   final Uint8List? artwork; // Kept in memory, usually not saved to DB
   final bool isFavorite;
+  final String fileExtention;
 
   SongModel({
     required this.id,
@@ -19,6 +20,7 @@ class SongModel {
     required this.duration,
     this.artwork,
     this.isFavorite = false,
+    required this.fileExtention,
   });
 
   factory SongModel.fromMap(Map<String, dynamic> map) {
@@ -32,6 +34,7 @@ class SongModel {
       artwork: map['artwork'], // Expects Uint8List or null
       // Fix: If map is 1 (true) in DB, set true. Default to false.
       isFavorite: map['isFavorite'] == 1 || map['isFavorite'] == true,
+      fileExtention: map['fileExtention'],
     );
   }
 
@@ -44,6 +47,7 @@ class SongModel {
       'artist': artist,
       'album': album,
       'duration': duration,
+      'fileExtention': fileExtention,
       // 'artwork': artwork, // <-- WARNING: Don't save raw image bytes to DB usually
       'isFavorite': isFavorite ? 1 : 0,
     };

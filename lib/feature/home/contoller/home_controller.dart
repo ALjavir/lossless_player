@@ -1,4 +1,6 @@
 import 'dart:io';
+import 'package:file_picker/file_picker.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_media_metadata/flutter_media_metadata.dart';
 import 'package:lossless_player/feature/songs/model/song_model.dart'; // Ensure you have this
@@ -58,6 +60,7 @@ class HomeController extends GetxController {
         'duration': metadata.trackDuration ?? 0,
         'artwork': metadata.albumArt,
         'isFavorite': false,
+        'fileExtention': file.path.split('.').last.toUpperCase(),
       };
     } catch (e) {
       return {
@@ -78,5 +81,43 @@ class HomeController extends GetxController {
     return ext.endsWith('.mp3') ||
         ext.endsWith('.m4a') ||
         ext.endsWith('.flac');
+  }
+
+  Future<void> showdiolog(BuildContext context) async {
+    return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          scrollable: true,
+          title: Text('Folder'),
+          content: Obx(() {
+            return ListView.builder(
+              shrinkWrap: true,
+              itemCount: selectedFolders.length,
+              itemBuilder: (context, index) {
+                return ListTile(title: Text(selectedFolders[index]));
+              },
+            );
+          }),
+          actions: [
+            FloatingActionButton.small(
+              onPressed: () async {
+                String? folderPath = await FilePicker.platform
+                    .getDirectoryPath();
+                if (folderPath != null) {
+                  pickAndLoadFolder(folderPath);
+                  Navigator.pop(context);
+                }
+              },
+              backgroundColor: Colors.black,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(30),
+              ),
+              child: Icon(Icons.add, color: Colors.white),
+            ),
+          ],
+        );
+      },
+    );
   }
 }

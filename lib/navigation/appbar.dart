@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:high_res_audio/style/fontStyle.dart';
+import 'package:lossless_player/style/font.dart';
 
 class Appbar extends StatefulWidget implements PreferredSizeWidget {
   final Widget? leading;
@@ -69,23 +69,22 @@ class _AppbarState extends State<Appbar> {
             leading: Padding(
               padding: const EdgeInsets.all(8.0),
               child: RichText(
-                text: TextSpan(children: [
-                  TextSpan(
-                    text: 'TIDAL',
-                    style:
-                        Fontstyle.appbarfont(14, Colors.black, FontWeight.bold),
-                  ),
-                  TextSpan(
-                    text: 'x\n',
-                    style:
-                        Fontstyle.appbarfont(16, Colors.red, FontWeight.bold),
-                  ),
-                  TextSpan(
-                    text: 'JAVIR',
-                    style:
-                        Fontstyle.appbarfont(18, Colors.black, FontWeight.bold),
-                  ),
-                ]),
+                text: TextSpan(
+                  children: [
+                    TextSpan(
+                      text: 'TIDAL',
+                      style: Fontstyle.appbarfont(14, Colors.black),
+                    ),
+                    TextSpan(
+                      text: 'x\n',
+                      style: Fontstyle.appbarfont(16, Colors.red),
+                    ),
+                    TextSpan(
+                      text: 'JAVIR',
+                      style: Fontstyle.appbarfont(18, Colors.black),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
