@@ -2,20 +2,21 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lossless_audio/controller/player_controller.dart';
-import 'package:lossless_audio/style/font.dart';
-import 'package:lossless_audio/widget/song_contaner.dart';
+import 'package:lossless_player/controller/player_controller.dart';
+import 'package:lossless_player/style/font.dart';
+import 'package:lossless_player/widget/song_contaner.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
 class MyexpensiontileFolder extends StatefulWidget {
   final String folderName;
   final List<SongModel> folderSong;
   final Uint8List? folderImage;
-  const MyexpensiontileFolder(
-      {super.key,
-      required this.folderName,
-      required this.folderSong,
-      required this.folderImage});
+  const MyexpensiontileFolder({
+    super.key,
+    required this.folderName,
+    required this.folderSong,
+    required this.folderImage,
+  });
 
   @override
   State<MyexpensiontileFolder> createState() => _MyexpensiontileFolderState();
@@ -42,11 +43,7 @@ class _MyexpensiontileFolderState extends State<MyexpensiontileFolder> {
                       ? MemoryImage(widget.folderImage!)
                       : null,
                   child: widget.folderImage == null
-                      ? Icon(
-                          Icons.music_note,
-                          size: 40,
-                          color: Colors.black,
-                        )
+                      ? Icon(Icons.music_note, size: 40, color: Colors.black)
                       : null,
                 ),
 
@@ -63,8 +60,12 @@ class _MyexpensiontileFolderState extends State<MyexpensiontileFolder> {
             ),
             ExpansionTile(
               tilePadding: EdgeInsets.only(left: 0),
-              backgroundColor:
-                  const Color.fromARGB(255, 255, 255, 255).withOpacity(0.2),
+              backgroundColor: const Color.fromARGB(
+                255,
+                255,
+                255,
+                255,
+              ).withOpacity(0.2),
               iconColor: const Color.fromARGB(255, 0, 0, 0),
               shape: RoundedRectangleBorder(
                 side: BorderSide(color: Colors.transparent), // Removes border

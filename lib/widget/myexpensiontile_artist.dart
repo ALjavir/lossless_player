@@ -2,9 +2,9 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lossless_audio/controller/player_controller.dart';
-import 'package:lossless_audio/style/font.dart';
-import 'package:lossless_audio/widget/albam.dart';
+import 'package:lossless_player/controller/player_controller.dart';
+import 'package:lossless_player/style/font.dart';
+import 'package:lossless_player/widget/albam.dart';
 
 // import 'package:music_player/style/font.dart';
 // import 'package:music_player/widget/albam.dart';
@@ -15,13 +15,14 @@ class MyexpensiontileArtist extends StatefulWidget {
   final int songNum;
   final int albumNum;
   final List<String> albumName;
-  const MyexpensiontileArtist(
-      {super.key,
-      required this.atistimage,
-      required this.artistName,
-      required this.songNum,
-      required this.albumNum,
-      required this.albumName});
+  const MyexpensiontileArtist({
+    super.key,
+    required this.atistimage,
+    required this.artistName,
+    required this.songNum,
+    required this.albumNum,
+    required this.albumName,
+  });
 
   @override
   State<MyexpensiontileArtist> createState() => _MyExpensionTileState();
@@ -55,11 +56,7 @@ class _MyExpensionTileState extends State<MyexpensiontileArtist> {
                       ? MemoryImage(widget.atistimage!)
                       : null,
                   child: widget.atistimage == null
-                      ? Icon(
-                          Icons.music_note,
-                          size: 40,
-                          color: Colors.black,
-                        )
+                      ? Icon(Icons.music_note, size: 40, color: Colors.black)
                       : null,
                 ),
 
@@ -77,7 +74,7 @@ class _MyExpensionTileState extends State<MyexpensiontileArtist> {
                       Text(
                         'Album: ${widget.albumNum} / Song: ${widget.songNum}',
                         style: Fontstyle.AlbamN(14, FontWeight.bold),
-                      )
+                      ),
                     ],
                   ),
                 ),
@@ -85,8 +82,12 @@ class _MyExpensionTileState extends State<MyexpensiontileArtist> {
             ),
             ExpansionTile(
               tilePadding: EdgeInsets.only(left: 0),
-              backgroundColor:
-                  const Color.fromARGB(255, 255, 255, 255).withOpacity(0.2),
+              backgroundColor: const Color.fromARGB(
+                255,
+                255,
+                255,
+                255,
+              ).withOpacity(0.2),
               iconColor: const Color.fromARGB(255, 0, 0, 0),
               shape: RoundedRectangleBorder(
                 side: BorderSide(color: Colors.transparent), // Removes border
@@ -99,9 +100,10 @@ class _MyExpensionTileState extends State<MyexpensiontileArtist> {
               ),
               children: [
                 Albam(
-                  albamName: widget.albumName, artistName: widget.artistName,
+                  albamName: widget.albumName,
+                  artistName: widget.artistName,
                   //albumNum: widget.albumNum,
-                )
+                ),
               ],
             ),
           ],

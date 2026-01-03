@@ -4,6 +4,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:on_audio_query/on_audio_query.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class PlayerController extends GetxController {
   final audioQuery = OnAudioQuery();
@@ -39,33 +40,57 @@ class PlayerController extends GetxController {
   }
 
   // Fetch songs from selected folders and cache them
+  // Fetch songs from selected folders and cache them
   Future<void> fetchSongs() async {
+    // --- FIX 1: Ask for permission before fetching ---
+    // This prevents the "Application doesn't have access to the library" crash
+    var status = await Permission.audio.status;
+    if (!status.isGranted) {
+      status = await Permission.storage.status;
+      if (!status.isGranted) {
+        await Permission.audio.request();
+        await Permission.storage.request();
+      }
+    }
+
     try {
-      List<SongModel> allSongs = await audioQuery.querySongs();
+      List<SongModel> allSongs = await audioQuery.querySongs(
+        sortType: SongSortType.DATE_ADDED,
+        orderType: OrderType.DESC_OR_GREATER,
+        uriType: UriType.EXTERNAL,
+        ignoreCase: true,
+      );
 
-      // Normalize folder paths (add trailing slash)
-      final normalizedFolders = selectedFolders
-          .map((folder) => folder.endsWith('/') ? folder : '$folder/')
-          .toList();
+      // --- FIX 2: Show ALL songs if no folder is picked ---
+      // If selectedFolders is empty, show everything. Otherwise, filter.
+      List<SongModel> filteredSongs;
 
-      // Filter songs from selected folders only
-      final filteredSongs = allSongs.where((song) {
-        // Normalize song path for comparison
-        final songPath = song.data.endsWith('/') ? song.data : '${song.data}/';
-        return normalizedFolders.any((folder) => songPath.startsWith(folder));
-      }).toList();
+      if (selectedFolders.isEmpty) {
+        filteredSongs = allSongs;
+      } else {
+        // Normalize folder paths (add trailing slash)
+        final normalizedFolders = selectedFolders
+            .map((folder) => folder.endsWith('/') ? folder : '$folder/')
+            .toList();
+
+        // Filter songs from selected folders only
+        filteredSongs = allSongs.where((song) {
+          final songPath = song.data.endsWith('/')
+              ? song.data
+              : '${song.data}/';
+          return normalizedFolders.any((folder) => songPath.startsWith(folder));
+        }).toList();
+      }
 
       // Remove duplicates
       final uniqueSongs = filteredSongs.toSet().toList();
 
       cachedSongs.assignAll(uniqueSongs);
-
-      //songsWithArtwork.assign(uniqueSongs as SongWithArtwork);
-
-      //await _prefetchArtwork();
     } catch (e) {
       print("Error fetching songs: $e");
     }
+
+    // Resume your existing logic
     artist();
     album();
     folder();
@@ -95,9 +120,10 @@ class PlayerController extends GetxController {
           artistNpic.putIfAbsent(unArtistName, () => song.id);
           artisNalbum.putIfAbsent(unArtistName, () => <String>[].obs);
           if (!artisNalbum[unArtistName]!.contains(song.album)) {
-            artisNalbum[unArtistName]!.add(song.album!
-                //!= "<unknown>" ? song.album! : "Unknown Album"
-                );
+            artisNalbum[unArtistName]!.add(
+              song.album!,
+              //!= "<unknown>" ? song.album! : "Unknown Album"
+            );
           }
           artistNsongnumber.putIfAbsent(unArtistName, () => <String>[].obs);
           artistNsongnumber[unArtistName]?.add(song.title);
@@ -146,7 +172,8 @@ class PlayerController extends GetxController {
 
   Future<void> folder() async {
     print(
-        "-------------------------------------------------This is inside folder");
+      "-------------------------------------------------This is inside folder",
+    );
     // "/storage/emulated/0/#Music New era/The Great Exception"
     // "{_uri: content://media/external/audio/media/1000372282, artist: LMYK,
     // year: null, is_music: true, title: 0 (zero), genre_id: null, _size: 27430307,
@@ -224,30 +251,33 @@ class PlayerController extends GetxController {
               shrinkWrap: true,
               itemCount: selectedFolders.length,
               itemBuilder: (context, index) {
-                return ListTile(
-                  title: Text(selectedFolders[index]),
-                );
+                return ListTile(title: Text(selectedFolders[index]));
               },
             );
           }),
           actions: [
             FloatingActionButton.small(
               onPressed: () async {
-                String? folderPath =
-                    await FilePicker.platform.getDirectoryPath();
-                if (folderPath != null) {
-                  addFolder(folderPath);
-                  Navigator.pop(context); // Add folder via controller
+                // Use a try-catch block here because FilePicker can be buggy on some Android versions
+                try {
+                  String? folderPath = await FilePicker.platform
+                      .getDirectoryPath();
+
+                  if (folderPath != null) {
+                    // FIX 3: Force update the UI
+                    addFolder(folderPath);
+                    Navigator.pop(context);
+                  }
+                } catch (e) {
+                  print("Error picking folder: $e");
+                  // Optional: Show a snackbar saying "Could not pick folder"
                 }
               },
               backgroundColor: Colors.black,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(30),
               ),
-              child: Icon(
-                Icons.add,
-                color: Colors.white,
-              ),
+              child: Icon(Icons.add, color: Colors.white),
             ),
           ],
         );

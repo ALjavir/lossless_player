@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lossless_audio/style/font.dart';
+import 'package:lossless_player/style/font.dart';
 
 // import 'package:music_player/style/font.dart';
 // import 'package:music_player/widget/song_contaner.dart';
@@ -64,8 +64,12 @@ class _MyexpensiontilePlaylistState extends State<MyexpensiontilePlaylist> {
           ),
         ),
         ExpansionTile(
-          backgroundColor:
-              const Color.fromARGB(255, 255, 255, 255).withOpacity(0.2),
+          backgroundColor: const Color.fromARGB(
+            255,
+            255,
+            255,
+            255,
+          ).withOpacity(0.2),
           iconColor: const Color.fromARGB(255, 0, 0, 0),
           shape: RoundedRectangleBorder(
             side: BorderSide(color: Colors.transparent), // Removes border
@@ -87,10 +91,7 @@ class _MyexpensiontilePlaylistState extends State<MyexpensiontilePlaylist> {
           //       'assets/icon/T.png',
           //     )),
           //tilePadding: EdgeInsets.all(0),
-          title: Text(
-            "Song: 12",
-            style: Fontstyle.songN(18, Colors.black),
-          ),
+          title: Text("Song: 12", style: Fontstyle.songN(18, Colors.black)),
 
           children: [
             ListView.separated(

@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:lossless_audio/style/font.dart';
-import 'package:lossless_audio/widget/song_contaner.dart';
+import 'package:lossless_player/style/font.dart';
+import 'package:lossless_player/widget/song_contaner.dart';
 
 class Albam extends StatefulWidget {
   final List<String> albamName;
   final String artistName;
 
-  const Albam({
-    super.key,
-    required this.albamName,
-    required this.artistName,
-  });
+  const Albam({super.key, required this.albamName, required this.artistName});
 
   @override
   State<Albam> createState() => _AlbamState();
@@ -24,8 +20,8 @@ class _AlbamState extends State<Albam> {
       physics: ScrollPhysics(),
       itemCount: widget.albamName.length,
       separatorBuilder: (context, index) => const Divider(
-          //color: Colors.deepPurple,
-          ),
+        //color: Colors.deepPurple,
+      ),
       itemBuilder: (context, index) {
         //'assets/icon/1.jpg'
         return ExpansionTile(
@@ -42,7 +38,7 @@ class _AlbamState extends State<Albam> {
             SongContaner(
               buildCondition: widget.albamName[index],
               buildCondition1: widget.artistName,
-            )
+            ),
             //print(widget.albamName[index]);
             // ListView.builder(
             //     shrinkWrap: true,
