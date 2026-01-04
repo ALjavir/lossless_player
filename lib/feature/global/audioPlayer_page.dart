@@ -251,12 +251,22 @@ class _AudioplayerPageState extends State<AudioplayerPage> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 // Shuffle (Visual only for now)
-                IconButton(
-                  icon: Icon(Icons.shuffle, color: Colors.grey),
-                  onPressed: () {},
-                ),
 
                 // Previous Button
+                IconButton(
+                  icon: Icon(
+                    Icons.shuffle,
+                    // Change color to Pink if active, Grey if inactive
+                    color: _isShuffle ? Colors.pinkAccent : Colors.grey,
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      _isShuffle = !_isShuffle;
+                    });
+                  },
+                ),
+
+                // --- 2. PREVIOUS BUTTON ---
                 IconButton(
                   icon: Icon(
                     Icons.skip_previous_rounded,
@@ -309,10 +319,25 @@ class _AudioplayerPageState extends State<AudioplayerPage> {
                   onPressed: _playNext,
                 ),
 
-                // Loop (Visual only for now)
                 IconButton(
-                  icon: Icon(Icons.repeat, color: Colors.grey),
-                  onPressed: () {},
+                  icon: Icon(
+                    _loopMode == LoopMode.one ? Icons.repeat_one : Icons.repeat,
+                    color: _loopMode == LoopMode.off
+                        ? Colors.grey
+                        : Colors.pinkAccent,
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      // Cycle through modes: Off -> All -> One -> Off
+                      if (_loopMode == LoopMode.off) {
+                        _loopMode = LoopMode.all;
+                      } else if (_loopMode == LoopMode.all) {
+                        _loopMode = LoopMode.one;
+                      } else {
+                        _loopMode = LoopMode.off;
+                      }
+                    });
+                  },
                 ),
               ],
             ),
