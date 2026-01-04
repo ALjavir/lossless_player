@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lossless_player/controller/player_controller.dart';
 import 'package:lossless_player/style/font.dart';
-import 'package:lossless_player/widget/song_contaner.dart';
+import 'package:lossless_player/feature/global/song_contaner.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
 class MyexpensiontileFolder extends StatefulWidget {

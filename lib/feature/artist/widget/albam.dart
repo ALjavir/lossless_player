@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lossless_player/style/font.dart';
-import 'package:lossless_player/widget/song_contaner.dart';
+import 'package:lossless_player/feature/global/song_contaner.dart';
 
 class Albam extends StatefulWidget {
   final List<String> albamName;
@@ -39,17 +39,6 @@ class _AlbamState extends State<Albam> {
               buildCondition: widget.albamName[index],
               buildCondition1: widget.artistName,
             ),
-            //print(widget.albamName[index]);
-            // ListView.builder(
-            //     shrinkWrap: true,
-            //     physics: ScrollPhysics(),
-            //     itemCount: widget.albamName.length,
-            //     itemBuilder: (BuildContext context, int index) {
-            //       return
-            //       SongContaner(
-            //         buildCondition: albamName,
-            //         );
-            //     }),
           ],
         );
       },

@@ -3,30 +3,23 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lossless_player/controller/player_controller.dart';
-import 'package:lossless_player/pages/audioPlayer_page.dart';
+import 'package:lossless_player/feature/global/audioPlayer_page.dart';
 import 'package:lossless_player/style/font.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
 class SongContaner extends StatefulWidget {
-  //final int numberOfSong;
   final String buildCondition;
   final String? buildCondition1;
-  //final List<SongModel> songs;
 
   const SongContaner({
     super.key,
-    //required this.numberOfSong,
     required this.buildCondition,
     this.buildCondition1,
-    //required this.songs
   });
 
   @override
   State<SongContaner> createState() => _SongContanerState();
 }
-
-//Color hificolor = Colors.black;
-//Color nonhificolor = Colors.black45;
 
 class _SongContanerState extends State<SongContaner> {
   final PlayerController controller = Get.put(PlayerController());
@@ -40,7 +33,6 @@ class _SongContanerState extends State<SongContaner> {
       dividerColor = Colors.black26;
     } else {
       final albumNsong = controller.albumNsong;
-      // final artistNsong = controller.artistNsongnumber;
       final y = controller.folderSong;
       dividerColor = Colors.white;
       if (albumNsong.containsKey(widget.buildCondition)) {
@@ -53,16 +45,9 @@ class _SongContanerState extends State<SongContaner> {
             );
           }
         }
-        //songs = albumNsong[widget.buildCondition]!;
-        print(
-          "This is x--------------------------------------------------------:$songs ",
-        );
       }
       if (y.containsKey(widget.buildCondition)) {
         songs = y[widget.buildCondition]!;
-        print(
-          "This is y--------------------------------------------------------:$songs ",
-        );
       }
     }
     //final songs = controller.cachedSongs;
@@ -94,19 +79,17 @@ class _SongContanerState extends State<SongContaner> {
 
             return InkWell(
               onTap: () {
-                // 1. Get the full list of songs currently displayed
-                // (If you are filtering by Artist, pass that specific list.
-                // If you are on the main list, pass controller.cachedSongs)
-                List<SongModel> currentPlaylist = controller.cachedSongs;
+                // FIX: Use the local 'songs' list (which contains the filtered artist/album songs)
+                // instead of the global 'controller.cachedSongs'.
+                List<SongModel> currentPlaylist = songs;
 
-                // 2. Navigate
                 Get.to(
                   () => AudioplayerPage(
-                    songs: currentPlaylist,
-                    initialIndex: index, // The index of the item you tapped
+                    songs: currentPlaylist, // Pass the filtered list
+                    initialIndex:
+                        index, // Pass the index from this filtered list
                   ),
-                  transition:
-                      Transition.downToUp, // Makes it slide up like the image
+                  transition: Transition.downToUp,
                 );
               },
               child: Container(
@@ -213,29 +196,6 @@ class _SongContanerState extends State<SongContaner> {
                             "lib/assets/icon/hi-res_logo.jpg",
                           ),
                         ),
-                        // Row(
-                        //   spacing: 5.0,
-                        //   children: [
-                        //     // Text(
-                        //     //   song.fileExtension,
-                        //     //   style: Fontstyle.thambalfont(14, Colors.black),
-                        //     // ),
-                        //     Container(
-                        //       width: 40,
-                        //       decoration: BoxDecoration(
-                        //           color: badgeColor,
-                        //           borderRadius:
-                        //               BorderRadius.all(Radius.circular(10))),
-                        //       child:
-                        //        Text(
-                        //         "HI-FI",
-                        //         textAlign: TextAlign.center,
-                        //         style:
-                        //             Fontstyle.thambalfont(14, Colors.white),
-                        //       ),
-                        //     )
-                        //   ],
-                        // )
                       ],
                     ),
                   ],

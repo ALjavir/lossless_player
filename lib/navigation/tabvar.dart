@@ -2,10 +2,9 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lossless_player/controller/player_controller.dart';
-import 'package:lossless_player/pages/artist_page.dart';
-import 'package:lossless_player/pages/folder_page.dart';
-import 'package:lossless_player/pages/genres_page.dart';
-import 'package:lossless_player/pages/songhome_page.dart';
+import 'package:lossless_player/feature/artist/page/artist_page.dart';
+import 'package:lossless_player/feature/folder/page/folder_page.dart';
+import 'package:lossless_player/feature/home/page/songhome_page.dart';
 import 'package:lossless_player/style/font.dart';
 
 class Tabvar extends StatefulWidget {
@@ -87,41 +86,6 @@ class _TabvarState extends State<Tabvar> {
                   ],
                 ),
               ),
-              Tab(
-                child: Row(
-                  children: [
-                    Icon(Icons.style_rounded),
-                    SizedBox(width: 6),
-                    Text(
-                      "Genres",
-                      style: Fontstyle.thambalfont(12, Colors.black),
-                    ),
-                  ],
-                ),
-              ),
-
-              // Tab(
-              //   child: Row(
-              //     children: [
-              //       Icon(Icons.circle_rounded),
-              //       SizedBox(
-              //         width: 6,
-              //       ),
-              //       Text("Song", style: Fontstyle.poiretOne())
-              //     ],
-              //   ),
-              // ),
-              // Tab(
-              //   child: Row(
-              //     children: [
-              //       Icon(Icons.circle_rounded),
-              //       SizedBox(
-              //         width: 6,
-              //       ),
-              //       Text("Song", style: Fontstyle.poiretOne())
-              //     ],
-              //   ),
-              // ),
             ],
           ),
         ),
@@ -130,7 +94,7 @@ class _TabvarState extends State<Tabvar> {
             SongHomePage(), // Added Homepage here
             ArtistPage(),
             Folder(),
-            Genres(),
+            // Genres(),
             //Test()
           ],
         ),

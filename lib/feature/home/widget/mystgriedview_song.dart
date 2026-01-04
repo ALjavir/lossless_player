@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 import 'package:lossless_player/controller/player_controller.dart';
+import 'package:lossless_player/feature/global/audioPlayer_page.dart';
+
 import 'package:lossless_player/style/font.dart';
 
 import 'package:on_audio_query/on_audio_query.dart';
@@ -92,38 +94,52 @@ class _MystgriedviewState extends State<MystgriedviewSong> {
                 ),
                 builder: (context, artworkSnapshot) {
                   final artwork = artworkSnapshot.data;
-                  return Card(
-                    color: Colors.white,
-                    margin: EdgeInsets.all(2),
-                    child: Stack(
-                      alignment: AlignmentDirectional.bottomCenter,
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(10),
-                          child: artwork != null
-                              ? Image.memory(artwork, fit: BoxFit.cover)
-                              : Icon(
-                                  Icons.music_note,
-                                  size: 40,
-                                  color: Colors.black,
-                                ),
+                  return InkWell(
+                    onTap: () {
+                      List<SongModel> currentPlaylist = controller.cachedSongs;
+
+                      // 2. Navigate
+                      Get.to(
+                        () => AudioplayerPage(
+                          songs: currentPlaylist,
+                          initialIndex: index,
                         ),
-                        Container(
-                          padding: EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                            color: Colors.black45,
-                            borderRadius: BorderRadiusDirectional.vertical(
-                              bottom: Radius.circular(10),
+                        transition: Transition.downToUp,
+                      );
+                    },
+                    child: Card(
+                      color: Colors.white,
+                      margin: EdgeInsets.all(2),
+                      child: Stack(
+                        alignment: AlignmentDirectional.bottomCenter,
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
+                            child: artwork != null
+                                ? Image.memory(artwork, fit: BoxFit.cover)
+                                : Icon(
+                                    Icons.music_note,
+                                    size: 40,
+                                    color: Colors.black,
+                                  ),
+                          ),
+                          Container(
+                            padding: EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                              color: Colors.black45,
+                              borderRadius: BorderRadiusDirectional.vertical(
+                                bottom: Radius.circular(10),
+                              ),
+                            ),
+                            width: double.maxFinite,
+                            child: Text(
+                              song.title,
+                              style: Fontstyle.songN(18, Colors.white),
+                              textAlign: TextAlign.center,
                             ),
                           ),
-                          width: double.maxFinite,
-                          child: Text(
-                            song.title,
-                            style: Fontstyle.songN(18, Colors.white),
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   );
                 },

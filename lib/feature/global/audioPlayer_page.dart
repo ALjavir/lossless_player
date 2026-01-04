@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:on_audio_query/on_audio_query.dart';
@@ -21,7 +23,8 @@ class _AudioplayerPageState extends State<AudioplayerPage> {
   late AudioPlayer _audioPlayer;
   late int _currentIndex;
   bool _isPlaying = false;
-
+  bool _isShuffle = false;
+  LoopMode _loopMode = LoopMode.off;
   @override
   void initState() {
     super.initState();
@@ -52,15 +55,6 @@ class _AudioplayerPageState extends State<AudioplayerPage> {
     }
   }
 
-  void _playNext() {
-    if (_currentIndex < widget.songs.length - 1) {
-      setState(() {
-        _currentIndex++;
-      });
-      _loadSong();
-    }
-  }
-
   void _playPrevious() {
     if (_currentIndex > 0) {
       setState(() {
@@ -82,6 +76,34 @@ class _AudioplayerPageState extends State<AudioplayerPage> {
     String minutes = duration.inMinutes.toString();
     String seconds = (duration.inSeconds % 60).toString().padLeft(2, '0');
     return "$minutes:$seconds";
+  }
+
+  void _playNext() {
+    if (_loopMode == LoopMode.one) {
+      // If Repeat One is on, just replay the current song
+      _audioPlayer.seek(Duration.zero);
+      _audioPlayer.play();
+    } else if (_isShuffle) {
+      // If Shuffle is on, pick a random song
+      setState(() {
+        _currentIndex = Random().nextInt(widget.songs.length);
+      });
+      _loadSong();
+    } else {
+      // Normal Logic
+      if (_currentIndex < widget.songs.length - 1) {
+        setState(() {
+          _currentIndex++;
+        });
+        _loadSong();
+      } else if (_loopMode == LoopMode.all) {
+        // If at the end AND Repeat All is on, go back to start
+        setState(() {
+          _currentIndex = 0;
+        });
+        _loadSong();
+      }
+    }
   }
 
   @override
@@ -130,18 +152,14 @@ class _AudioplayerPageState extends State<AudioplayerPage> {
                     id: currentSong.id,
                     type: ArtworkType.AUDIO,
 
-                    // 1. Set Size to maximum (2000 is usually treated as full res)
                     size: 3000,
 
-                    // 2. Set Quality to 100 (Max compression quality)
                     quality: 100,
 
-                    // 3. Use JPEG (Usually better for photos) or PNG
                     format: ArtworkFormat.JPEG,
 
                     artworkFit: BoxFit.cover,
 
-                    // 4. Important: Use a placeholder while the HD image loads (it takes longer)
                     nullArtworkWidget: Container(
                       color: Colors.grey[200],
                       child: Icon(

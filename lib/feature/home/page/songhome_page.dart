@@ -4,8 +4,8 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:lossless_player/controller/player_controller.dart';
 import 'package:lossless_player/style/font.dart';
-import 'package:lossless_player/widget/mystgriedview_song.dart';
-import 'package:lossless_player/widget/song_contaner.dart';
+import 'package:lossless_player/feature/home/widget/mystgriedview_song.dart';
+import 'package:lossless_player/feature/global/song_contaner.dart';
 
 class SongHomePage extends StatefulWidget {
   const SongHomePage({super.key});
@@ -103,32 +103,6 @@ class _SongHomePageState extends State<SongHomePage> {
                   padding: const EdgeInsets.all(8),
                   child: SongContaner(buildCondition: 'full'),
                 ),
-                // ListView.separated(
-                //   shrinkWrap: true,
-                //   physics: const NeverScrollableScrollPhysics(),
-                //   itemCount: songs.length,
-                //   separatorBuilder: (context, index) => const Divider(),
-                //   itemBuilder: (context, index) {
-                //     final song = songs[index];
-                //     return FutureBuilder<Uint8List?>(
-                //       future: controller.audioQuery.queryArtwork(
-                //           song.id, ArtworkType.AUDIO,
-                //           format: ArtworkFormat.JPEG, quality: 1000),
-                //       builder: (context, artworkSnapshot) {
-                //         final artwork = artworkSnapshot.data;
-                //         final duration =
-                //             controller.formatDuration(song.duration!.toInt());
-                //         return SongContaner(
-                //             coverImage: artwork,
-                //             name: song.title,
-                //             artist: song.artist ?? "Unknown Artist",
-                //             albam: song.album ?? "Unknown Album",
-                //             formate: song.fileExtension,
-                //             endtime: duration);
-                //       },
-                //     );
-                //   },
-                // ),
               ],
             ),
           );
