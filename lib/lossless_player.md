@@ -1,0 +1,36 @@
+```
+└── 📁lib
+    └── 📁assets
+        └── 📁icon
+            ├── hi-res_logo.jpg
+            ├── logo.png
+    └── 📁controller
+        ├── player_controller.dart
+    └── 📁feature
+        └── 📁artist
+            └── 📁page
+                ├── artist_page.dart
+            └── 📁widget
+                ├── albam.dart
+                ├── myexpensiontile_artist.dart
+        └── 📁folder
+            └── 📁page
+                ├── folder_page.dart
+            └── 📁widget
+                ├── myexpensiontile_folder.dart
+        └── 📁global
+            ├── audioPlayer_page.dart
+            ├── song_contaner.dart
+        └── 📁home
+            └── 📁page
+                ├── songhome_page.dart
+            └── 📁widget
+                ├── mystgriedview_song.dart
+    └── 📁model
+        ├── song_model.dart
+    └── 📁navigation
+        ├── tabvar.dart
+    └── 📁style
+        ├── font.dart
+    └── main.dart
+```
