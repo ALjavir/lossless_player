@@ -33,7 +33,7 @@ class _MyExpensionTileState extends State<MyexpensiontileArtist> {
 
   //get albumNumm => widget.albumNum;
 
-  get songNum => widget.songNum;
+  int get songNum => widget.songNum;
 
   //get albumName => albumName;
 

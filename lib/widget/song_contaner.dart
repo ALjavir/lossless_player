@@ -93,7 +93,22 @@ class _SongContanerState extends State<SongContaner> {
                 : Colors.transparent;
 
             return InkWell(
-              onTap: () => Get.to(() => AudioplayerPage(songPath: song.data)),
+              onTap: () {
+                // 1. Get the full list of songs currently displayed
+                // (If you are filtering by Artist, pass that specific list.
+                // If you are on the main list, pass controller.cachedSongs)
+                List<SongModel> currentPlaylist = controller.cachedSongs;
+
+                // 2. Navigate
+                Get.to(
+                  () => AudioplayerPage(
+                    songs: currentPlaylist,
+                    initialIndex: index, // The index of the item you tapped
+                  ),
+                  transition:
+                      Transition.downToUp, // Makes it slide up like the image
+                );
+              },
               child: Container(
                 color: Colors.white,
                 padding: EdgeInsets.all(0),

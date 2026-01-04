@@ -5,23 +5,25 @@ class Fontstyle {
   static TextStyle appbarfont(double fontSize, Color color) {
     return GoogleFonts.cormorant(
       textStyle: TextStyle(
-          fontSize: fontSize, fontWeight: FontWeight.w500, color: color),
+        fontSize: fontSize,
+        fontWeight: FontWeight.w500,
+        color: color,
+      ),
     );
   }
 
   static TextStyle thambalfont(double fontSize, Color color) {
     return GoogleFonts.aboreto(
       textStyle: TextStyle(
-          fontSize: fontSize, fontWeight: FontWeight.bold, color: color),
+        fontSize: fontSize,
+        fontWeight: FontWeight.bold,
+        color: color,
+      ),
     );
   }
 
   static TextStyle artistN(double fontsize) {
-    return GoogleFonts.cinzel(
-      textStyle: TextStyle(
-        fontSize: fontsize,
-      ),
-    );
+    return GoogleFonts.cinzel(textStyle: TextStyle(fontSize: fontsize));
   }
 
   static TextStyle songN(double Fontsize, Color color) {
@@ -41,7 +43,7 @@ class Fontstyle {
 
 class X {
   bool expend = false;
-  printex() {
+  void printex() {
     print("From X $expend");
   }
 }
