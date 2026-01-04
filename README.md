@@ -64,7 +64,7 @@ A complete playback interface featuring:
 
 1.  Clone the repo:
     ```bash
-    git clone [https://github.com/ALjavir/lossless-music-player.git](https://github.com/ALjavir/lossless-music-player.git)
+    git clone https://github.com/ALjavir/lossless-music-player.git
     ```
 2.  Install dependencies:
     ```bash
