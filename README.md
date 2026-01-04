@@ -64,7 +64,7 @@ A complete playback interface featuring:
 
 1.  Clone the repo:
     ```bash
-    git clone [https://github.com/yourusername/lossless-music-player.git](https://github.com/yourusername/lossless-music-player.git)
+    git clone [https://github.com/yourusername/lossless-music-player.git](https://github.com/ALjavir/lossless-music-player.git)
     ```
 2.  Install dependencies:
     ```bash
@@ -76,7 +76,13 @@ A complete playback interface featuring:
     ```
 
 ---
+## 📬 Contact
 
+**Al Javir** - Flutter Developer
+* 📧 [flutter.x.tonmoy@gmail.com](mailto:flutter.x.tonmoy@gmail.com)
+* 🔗 [GitHub Profile](https://github.com/ALjavir)
+
+  
 ## 📄 License
 
 This project is open-source and available under the [MIT License](LICENSE).
