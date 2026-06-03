@@ -44,8 +44,7 @@ class _SongHomePageState extends State<SongHomePage> {
                   ),
                   ElevatedButton(
                     onPressed: () async {
-                      String? folderPath = await FilePicker.platform
-                          .getDirectoryPath();
+                      String? folderPath = await FilePicker.getDirectoryPath();
                       if (folderPath != null) {
                         controller.addFolder(folderPath);
                         Navigator.pop(
@@ -96,9 +95,21 @@ class _SongHomePageState extends State<SongHomePage> {
           return SingleChildScrollView(
             padding: EdgeInsets.only(left: 4),
             child: Column(
+              spacing: 10,
               children: [
                 MystgriedviewSong(),
-                Text("Songs", style: Fontstyle.thambalfont(30, Colors.black)),
+                SizedBox(height: 10),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  spacing: 5,
+                  children: [
+                    Icon(Icons.new_releases_outlined, size: 30),
+                    Text(
+                      "Recently added.",
+                      style: Fontstyle.thambalfont(18, FontWeight.w400),
+                    ),
+                  ],
+                ),
                 Padding(
                   padding: const EdgeInsets.all(8),
                   child: SongContaner(buildCondition: 'full'),
@@ -106,6 +117,32 @@ class _SongHomePageState extends State<SongHomePage> {
               ],
             ),
           );
+
+          // SingleChildScrollView(
+          //   padding: EdgeInsets.only(left: 4),
+          //   child: Column(
+          //     children: [
+          //       MystgriedviewSong(),
+          //       SizedBox(height: 10),
+          //       Center(
+          //         child: Row(
+          //           spacing: 5,
+          //           children: [
+          //             Icon(Icons.new_releases_outlined, size: 30),
+          //             Text(
+          //               "Recently added.",
+          //               style: Fontstyle.thambalfont(18, FontWeight.w400),
+          //             ),
+          //           ],
+          //         ),
+          //       ),
+          //       Padding(
+          //         padding: const EdgeInsets.all(8),
+          //         child: SongContaner(buildCondition: 'full'),
+          //       ),
+          //     ],
+          //   ),
+          // );
         }
       }),
     );

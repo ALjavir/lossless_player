@@ -165,7 +165,7 @@ class _SongContanerState extends State<SongContaner> {
                                   " / ${song.fileExtension}",
                                   style: Fontstyle.thambalfont(
                                     12,
-                                    Colors.black,
+                                    FontWeight.bold,
                                   ),
                                 ),
                               ],

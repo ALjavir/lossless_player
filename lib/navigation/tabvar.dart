@@ -22,16 +22,22 @@ class _TabvarState extends State<Tabvar> {
       length: 4,
       child: Scaffold(
         appBar: AppBar(
+          elevation: 0,
+          scrolledUnderElevation: 0,
           //toolbarHeight: 80,
           //bottomOpacity: 0.5,
           backgroundColor: Colors.white,
-          leading: Padding(
-            padding: const EdgeInsets.only(left: 6),
-            child: Image.asset("lib/assets/icon/logo.png"),
-          ),
-          title: Text(
-            "Lossless Music",
-            style: Fontstyle.appbarfont(26, Colors.black),
+
+          title: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            spacing: 10,
+            children: [
+              Image.asset("lib/assets/icon/logo.png", scale: 4),
+              Text(
+                "Lossless Music",
+                style: Fontstyle.appbarfont(26, Colors.black),
+              ),
+            ],
           ),
           actions: [
             IconButton(
@@ -43,21 +49,24 @@ class _TabvarState extends State<Tabvar> {
           ],
           bottom: TabBar(
             isScrollable: true,
-            //padding: EdgeInsets.only(left: 8),
+            //   padding: EdgeInsetsGeometry.only(bottom: 10),
             tabAlignment: TabAlignment.center,
             unselectedLabelColor: Colors.black26,
             labelColor: Colors.black,
-            indicatorColor: const Color.fromARGB(255, 0, 0, 0),
-            indicatorSize: TabBarIndicatorSize.tab,
+            indicatorColor: Colors.transparent,
+            dividerColor: Colors.transparent,
+            indicatorSize: TabBarIndicatorSize.label,
+
             tabs: [
               Tab(
                 child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Icon(Icons.circle_rounded),
+                    Icon(Icons.music_note),
                     SizedBox(width: 6),
                     Text(
-                      "Song",
-                      style: Fontstyle.thambalfont(12, Colors.black),
+                      "Song.",
+                      style: Fontstyle.thambalfont(18, FontWeight.normal),
                     ),
                   ],
                 ),
@@ -68,8 +77,8 @@ class _TabvarState extends State<Tabvar> {
                     Icon(Icons.people),
                     SizedBox(width: 6),
                     Text(
-                      "Artist",
-                      style: Fontstyle.thambalfont(12, Colors.black),
+                      "Artist.",
+                      style: Fontstyle.thambalfont(18, FontWeight.normal),
                     ),
                   ],
                 ),
@@ -80,8 +89,8 @@ class _TabvarState extends State<Tabvar> {
                     Icon(Icons.folder),
                     SizedBox(width: 6),
                     Text(
-                      "Folder",
-                      style: Fontstyle.thambalfont(12, Colors.black),
+                      "Folder.",
+                      style: Fontstyle.thambalfont(18, FontWeight.normal),
                     ),
                   ],
                 ),
@@ -123,8 +132,7 @@ class _TabvarState extends State<Tabvar> {
             FloatingActionButton.small(
               onPressed: () async {
                 // Let user pick a folder and add it to the list
-                String? folderPath = await FilePicker.platform
-                    .getDirectoryPath();
+                String? folderPath = await FilePicker.getDirectoryPath();
                 if (folderPath != null) {
                   controller.addFolder(folderPath);
                   Navigator.pop(context); // Add folder via controller

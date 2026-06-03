@@ -3,21 +3,21 @@ import 'package:google_fonts/google_fonts.dart';
 
 class Fontstyle {
   static TextStyle appbarfont(double fontSize, Color color) {
-    return GoogleFonts.cormorant(
+    return GoogleFonts.playfairDisplay(
       textStyle: TextStyle(
         fontSize: fontSize,
-        fontWeight: FontWeight.w500,
+        fontWeight: FontWeight.normal,
         color: color,
       ),
     );
   }
 
-  static TextStyle thambalfont(double fontSize, Color color) {
-    return GoogleFonts.aboreto(
+  static TextStyle thambalfont(double fontSize, FontWeight fontWeight) {
+    return GoogleFonts.roboto(
       textStyle: TextStyle(
         fontSize: fontSize,
-        fontWeight: FontWeight.bold,
-        color: color,
+        fontWeight: fontWeight,
+        // color: color,
       ),
     );
   }

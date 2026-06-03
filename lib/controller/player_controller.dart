@@ -87,7 +87,7 @@ class PlayerController extends GetxController {
 
       cachedSongs.assignAll(uniqueSongs);
     } catch (e) {
-      print("Error fetching songs: $e");
+      // print("Error fetching songs: $e");
     }
 
     // Resume your existing logic
@@ -110,7 +110,7 @@ class PlayerController extends GetxController {
     final uniqueArtist = LinkedHashSet<String>.from(TempArtist).toList();
 
     for (String unArtistName in uniqueArtist) {
-      print(unArtistName);
+      //  print(unArtistName);
       for (var song in cachedSongs) {
         //print(song.artist);
         if (unArtistName == song.artist) {
@@ -213,7 +213,7 @@ class PlayerController extends GetxController {
     }
 
     for (var a in folderSong.entries) {
-      print("${a.key}: ${a.value.length}");
+      // print("${a.key}: ${a.value.length}");
     }
   }
 
@@ -260,8 +260,7 @@ class PlayerController extends GetxController {
               onPressed: () async {
                 // Use a try-catch block here because FilePicker can be buggy on some Android versions
                 try {
-                  String? folderPath = await FilePicker.platform
-                      .getDirectoryPath();
+                  String? folderPath = await FilePicker.getDirectoryPath();
 
                   if (folderPath != null) {
                     // FIX 3: Force update the UI
