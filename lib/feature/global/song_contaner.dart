@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lossless_player/controller/player_controller.dart';
+import 'package:lossless_player/feature/global/SongSkeleton.dart';
 import 'package:lossless_player/feature/global/audioPlayer_page.dart';
 import 'package:lossless_player/style/font.dart';
 import 'package:on_audio_query/on_audio_query.dart';
@@ -27,14 +28,14 @@ class _SongContanerState extends State<SongContaner> {
   Widget build(BuildContext context) {
     //
     RxList<SongModel> songs = <SongModel>[].obs;
-    Color dividerColor;
+    // Color dividerColor;
     if (widget.buildCondition == "full") {
       songs = controller.cachedSongs;
-      dividerColor = Colors.black26;
+      // dividerColor = Colors.black26;
     } else {
       final albumNsong = controller.albumNsong;
       final y = controller.folderSong;
-      dividerColor = Colors.white;
+      // dividerColor = Colors.white;
       if (albumNsong.containsKey(widget.buildCondition)) {
         for (var a in albumNsong.values) {
           for (var x in a) {
@@ -53,9 +54,10 @@ class _SongContanerState extends State<SongContaner> {
     //final songs = controller.cachedSongs;
     return ListView.separated(
       shrinkWrap: true,
+
       physics: const NeverScrollableScrollPhysics(),
       itemCount: songs.length,
-      separatorBuilder: (context, index) => Divider(color: dividerColor),
+      separatorBuilder: (context, index) => Divider(color: Colors.transparent),
       itemBuilder: (context, index) {
         final song = songs[index];
         //print('$song.artist\n');
@@ -63,12 +65,12 @@ class _SongContanerState extends State<SongContaner> {
           future: controller.audioQuery.queryArtwork(
             song.id,
             ArtworkType.AUDIO,
-            format: ArtworkFormat.JPEG,
-            quality: 1000,
+            format: ArtworkFormat.PNG,
+            size: 1000,
           ),
           builder: (context, artworkSnapshot) {
             if (artworkSnapshot.connectionState == ConnectionState.waiting) {
-              return CircularProgressIndicator();
+              return SongSkeleton();
             }
             final artwork = artworkSnapshot.data;
             final duration = controller.formatDuration(song.duration!.toInt());
@@ -94,9 +96,10 @@ class _SongContanerState extends State<SongContaner> {
               },
               child: Container(
                 color: Colors.white,
-                padding: EdgeInsets.all(0),
+
                 height: 80,
                 child: Row(
+                  spacing: 12,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     CircleAvatar(
@@ -113,65 +116,65 @@ class _SongContanerState extends State<SongContaner> {
                             )
                           : null,
                     ),
+                    // artwork != null
+                    //     ? Image.memory(artwork, fit: BoxFit.cover)
+                    //     : Center(
+                    //         child: Icon(
+                    //           Icons.music_note,
+                    //           size: 40,
+                    //           color: Colors.black,
+                    //         ),
+                    //       ),
                     Expanded(
                       flex: 1,
-                      child: Padding(
-                        padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              song.title,
-                              style: Fontstyle.songN(16, Colors.black),
-                              overflow: TextOverflow.fade,
-                              maxLines: 1,
-                              softWrap: false,
-                            ),
-                            Text(
-                              song.album!,
-                              // song.artist != '<unknown>'
-                              //     ? song.album!
-                              //     : 'Unknown Album',
-                              style: Fontstyle.AlbamN(12, FontWeight.normal),
-                              overflow: TextOverflow.ellipsis,
-                              maxLines: 1,
-                              softWrap: false,
-                            ),
-                            Text(
-                              //song.artist ?? 'Unknown Artist',
-                              song.artist!,
-                              // = '<unknown>'
-                              //     ? song.artist!
-                              //     : "Unknown Artist",
-                              style: Fontstyle.artistN(12),
-                              overflow: TextOverflow.ellipsis,
-                              maxLines: 1,
-                              softWrap: false,
-                            ),
-                            Row(
-                              children: [
-                                Text(
-                                  duration,
-                                  style: Fontstyle.AlbamN(
-                                    12,
-                                    FontWeight.normal,
-                                  ),
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 1,
-                                  softWrap: false,
-                                ),
-                                Text(
-                                  " / ${song.fileExtension}",
-                                  style: Fontstyle.thambalfont(
-                                    12,
-                                    FontWeight.bold,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            song.title,
+                            style: Fontstyle.songN(16, Colors.black),
+                            overflow: TextOverflow.fade,
+                            maxLines: 1,
+                            softWrap: true,
+                          ),
+                          Text(
+                            song.album!,
+                            // song.artist != '<unknown>'
+                            //     ? song.album!
+                            //     : 'Unknown Album',
+                            style: Fontstyle.AlbamN(12, FontWeight.normal),
+                            overflow: TextOverflow.fade,
+                            maxLines: 1,
+                            softWrap: true,
+                          ),
+                          Text(
+                            //song.artist ?? 'Unknown Artist',
+                            song.artist!,
+                            // = '<unknown>'
+                            //     ? song.artist!
+                            //     : "Unknown Artist",
+                            style: Fontstyle.artistN(12),
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
+                            softWrap: false,
+                          ),
+                          Row(
+                            children: [
+                              Text(
+                                duration,
+                                style: Fontstyle.AlbamN(12, FontWeight.normal),
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 1,
+                                softWrap: false,
+                              ),
+                              Text(
+                                " / ${song.fileExtension}",
+                                style: Fontstyle.AlbamN(12, FontWeight.normal),
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
                     ),
 

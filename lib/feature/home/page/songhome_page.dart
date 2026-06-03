@@ -93,7 +93,6 @@ class _SongHomePageState extends State<SongHomePage> {
           }
 
           return SingleChildScrollView(
-            padding: EdgeInsets.only(left: 4),
             child: Column(
               spacing: 10,
               children: [
@@ -110,10 +109,7 @@ class _SongHomePageState extends State<SongHomePage> {
                     ),
                   ],
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(8),
-                  child: SongContaner(buildCondition: 'full'),
-                ),
+                SongContaner(buildCondition: 'full'),
               ],
             ),
           );
@@ -136,7 +132,7 @@ class _SongHomePageState extends State<SongHomePage> {
           //           ],
           //         ),
           //       ),
-          //       Padding(
+          //       padding(
           //         padding: const EdgeInsets.all(8),
           //         child: SongContaner(buildCondition: 'full'),
           //       ),

@@ -100,8 +100,14 @@ class _TabvarState extends State<Tabvar> {
         ),
         body: const TabBarView(
           children: [
-            SongHomePage(), // Added Homepage here
-            ArtistPage(),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 12),
+              child: SongHomePage(),
+            ), // Added Homepage here
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 12),
+              child: ArtistPage(),
+            ),
             Folder(),
             // Genres(),
             //Test()

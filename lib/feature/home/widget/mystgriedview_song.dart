@@ -39,8 +39,7 @@ class _MystgriedviewState extends State<MystgriedviewSong> {
         alignment: AlignmentDirectional.center,
         children: [
           Obx(
-            () => Container(
-              padding: EdgeInsets.fromLTRB(3, 0, 3, 6),
+            () => SizedBox(
               height: 350,
               width: double.maxFinite,
               child: GridView.custom(
@@ -70,35 +69,35 @@ class _MystgriedviewState extends State<MystgriedviewSong> {
                       ),
                       builder: (context, artworkSnapshot) {
                         final artwork = artworkSnapshot.data;
-                        return InkWell(
-                          onTap: () {
-                            List<SongModel> currentPlaylist =
-                                controller.cachedSongs;
+                        return Padding(
+                          padding: const EdgeInsets.fromLTRB(0, 0, 10, 8),
+                          child: InkWell(
+                            onTap: () {
+                              List<SongModel> currentPlaylist =
+                                  controller.cachedSongs;
 
-                            // 2. Navigate
-                            Get.to(
-                              () => AudioplayerPage(
-                                songs: currentPlaylist,
-                                initialIndex: index,
-                              ),
-                              transition: Transition.downToUp,
-                            );
-                          },
-                          child: Card(
-                            color: Colors.white,
-                            // margin: EdgeInsets.all(2),
+                              // 2. Navigate
+                              Get.to(
+                                () => AudioplayerPage(
+                                  songs: currentPlaylist,
+                                  initialIndex: index,
+                                ),
+                                transition: Transition.downToUp,
+                              );
+                            },
                             child: Stack(
                               alignment: AlignmentDirectional.bottomCenter,
                               children: [
                                 artwork != null
                                     ? Image.memory(artwork, fit: BoxFit.cover)
-                                    : Icon(
-                                        Icons.music_note,
-                                        size: 40,
-                                        color: Colors.black,
+                                    : Center(
+                                        child: Icon(
+                                          Icons.music_note,
+                                          size: 40,
+                                          color: Colors.black,
+                                        ),
                                       ),
                                 Container(
-                                  padding: EdgeInsets.all(8),
                                   decoration: BoxDecoration(
                                     color: Colors.black45,
                                   ),

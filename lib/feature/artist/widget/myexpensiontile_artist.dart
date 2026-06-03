@@ -1,4 +1,5 @@
 import 'dart:typed_data';
+import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -34,31 +35,55 @@ class _MyExpensionTileState extends State<MyexpensiontileArtist> {
   //get albumNumm => widget.albumNum;
 
   int get songNum => widget.songNum;
+  bool isExpanded = false;
 
   //get albumName => albumName;
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      color: Colors.white,
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(8, 8, 8, 0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+    final artwork = widget.atistimage;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Stack(
+          alignment: AlignmentGeometry.bottomRight,
           children: [
+            // ClipRRect(
+            //   child: ImageFiltered(
+            //     imageFilter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+            //     child: artwork != null
+            //         ? Image.memory(
+            //             artwork,
+            //             fit: BoxFit.cover,
+            //             width: double.maxFinite,
+            //             height: 150,
+            //           )
+            //         : Center(
+            //             child: Icon(
+            //               Icons.music_note,
+            //               size: 40,
+            //               color: Colors.black,
+            //             ),
+            //           ),
+            //   ),
+            // ),
             Row(
               spacing: 10,
               children: [
-                CircleAvatar(
-                  backgroundColor: Colors.white,
-                  radius: 50,
-                  backgroundImage: widget.atistimage != null
-                      ? MemoryImage(widget.atistimage!)
-                      : null,
-                  child: widget.atistimage == null
-                      ? Icon(Icons.music_note, size: 40, color: Colors.black)
-                      : null,
-                ),
+                artwork != null
+                    ? Image.memory(
+                        artwork,
+                        fit: BoxFit.fitHeight,
+                        width: 150,
+                        height: 150,
+                      )
+                    : Center(
+                        child: Icon(
+                          Icons.music_note,
+                          size: 40,
+                          color: Colors.black,
+                        ),
+                      ),
 
                 ///expriment
                 Expanded(
@@ -80,35 +105,57 @@ class _MyExpensionTileState extends State<MyexpensiontileArtist> {
                 ),
               ],
             ),
-            ExpansionTile(
-              tilePadding: EdgeInsets.only(left: 0),
-              backgroundColor: const Color.fromARGB(
-                255,
-                255,
-                255,
-                255,
-              ).withOpacity(0.2),
-              iconColor: const Color.fromARGB(255, 0, 0, 0),
-              shape: RoundedRectangleBorder(
-                side: BorderSide(color: Colors.transparent), // Removes border
+            IconButton(
+              onPressed: () {
+                setState(() {
+                  isExpanded = !isExpanded;
+                });
+              },
+              icon: Icon(
+                isExpanded
+                    ? Icons.keyboard_arrow_down_rounded
+                    : Icons.keyboard_arrow_up_rounded,
+                size: 30,
               ),
-              minTileHeight: 0,
-              childrenPadding: EdgeInsets.all(0),
-              title: Text(
-                "This is 🎵${widget.artistName}",
-                style: Fontstyle.artistN(18),
-              ),
-              children: [
-                Albam(
-                  albamName: widget.albumName,
-                  artistName: widget.artistName,
-                  //albumNum: widget.albumNum,
-                ),
-              ],
             ),
           ],
         ),
-      ),
+
+        // Stack(
+        //   children: [
+        //     ClipRRect(
+        //       child: ImageFiltered(
+        //         imageFilter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+        //         child: artwork != null
+        //             ? Image.memory(
+        //                 artwork,
+        //                 fit: BoxFit.cover,
+        //                 width: double.maxFinite,
+        //                 height: 150,
+        //               )
+        //             : Center(
+        //                 child: Icon(
+        //                   Icons.music_note,
+        //                   size: 40,
+        //                   color: Colors.black,
+        //                 ),
+        //               ),
+        //       ),
+        //     ),
+        //   ],
+        // ),
+        AnimatedSize(
+          duration: const Duration(milliseconds: 250),
+          curve: Curves.easeInOut,
+          child: isExpanded
+              ? Albam(
+                  albamName: widget.albumName,
+                  artistName: widget.artistName,
+                )
+              : const SizedBox.shrink(),
+        ),
+        SizedBox(child: Divider(color: Colors.black26)),
+      ],
     );
   }
 }

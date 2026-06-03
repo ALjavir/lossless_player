@@ -15,21 +15,18 @@ class Albam extends StatefulWidget {
 class _AlbamState extends State<Albam> {
   @override
   Widget build(BuildContext context) {
-    return ListView.separated(
+    return ListView.builder(
       shrinkWrap: true,
       physics: ScrollPhysics(),
       itemCount: widget.albamName.length,
-      separatorBuilder: (context, index) => const Divider(
-        //color: Colors.deepPurple,
-      ),
+
       itemBuilder: (context, index) {
-        //'assets/icon/1.jpg'
         return ExpansionTile(
           shape: RoundedRectangleBorder(
-            side: BorderSide(color: Colors.transparent), // Removes border
+            side: BorderSide(color: Colors.transparent),
           ),
           minTileHeight: 0,
-          tilePadding: EdgeInsets.fromLTRB(8, 0, 0, 4),
+          tilePadding: EdgeInsets.zero,
           title: Text(
             widget.albamName[index],
             style: Fontstyle.AlbamN(16, FontWeight.bold),

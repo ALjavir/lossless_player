@@ -41,6 +41,9 @@ class _ArtistPageState extends State<ArtistPage> {
           );
         } else {
           return ListView.builder(
+            // separatorBuilder: (context, index) {
+            //   return Divider(color: Colors.transparent);
+            // },
             itemCount: controller.artistNpic.length,
             itemBuilder: (context, index) {
               String artistName = controller.artistNpic.keys.elementAt(index);
@@ -55,9 +58,10 @@ class _ArtistPageState extends State<ArtistPage> {
                 future: controller.audioQuery.queryArtwork(
                   picID,
                   ArtworkType.AUDIO,
-                  format: ArtworkFormat.JPEG,
-                  quality: 1000,
+                  format: ArtworkFormat.PNG,
+                  size: 1000,
                 ),
+
                 builder: (context, artworkSnapshot) {
                   //List  albumName = controller.artisNalbum.values.indexed;
                   if (artistName == LartistName) {
