@@ -39,7 +39,11 @@ class _SongHomePageState extends State<SongHomePage> {
                     onPressed: () => SystemNavigator.pop(),
                     child: Text(
                       "Cancel",
-                      style: Fontstyle.songN(25, Colors.black),
+                      style: Fontstyle.songN(
+                        25,
+                        Colors.black,
+                        FontWeight.normal,
+                      ),
                     ),
                   ),
                   ElevatedButton(
@@ -54,7 +58,11 @@ class _SongHomePageState extends State<SongHomePage> {
                     },
                     child: Text(
                       "Select Folder",
-                      style: Fontstyle.songN(25, Colors.black),
+                      style: Fontstyle.songN(
+                        25,
+                        Colors.black,
+                        FontWeight.normal,
+                      ),
                     ),
                   ),
                 ],
@@ -84,7 +92,11 @@ class _SongHomePageState extends State<SongHomePage> {
                     },
                     child: Text(
                       "Select Folder",
-                      style: Fontstyle.songN(25, Colors.black),
+                      style: Fontstyle.songN(
+                        25,
+                        Colors.black,
+                        FontWeight.normal,
+                      ),
                     ),
                   ),
                 ],
@@ -103,10 +115,7 @@ class _SongHomePageState extends State<SongHomePage> {
                   spacing: 5,
                   children: [
                     Icon(Icons.new_releases_outlined, size: 30),
-                    Text(
-                      "Recently added.",
-                      style: Fontstyle.thambalfont(18, FontWeight.w400),
-                    ),
+                    Text("Recently added.", style: Fontstyle.navfont(18)),
                   ],
                 ),
                 SongContaner(buildCondition: 'full'),

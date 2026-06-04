@@ -33,7 +33,7 @@ class _FolderState extends State<Folder> {
                   },
                   child: Text(
                     "Select Folder",
-                    style: Fontstyle.songN(25, Colors.black),
+                    style: Fontstyle.songN(25, Colors.black, FontWeight.normal),
                   ),
                 ),
               ],

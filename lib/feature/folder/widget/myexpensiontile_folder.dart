@@ -51,7 +51,11 @@ class _MyexpensiontileFolderState extends State<MyexpensiontileFolder> {
                 Expanded(
                   child: Text(
                     widget.folderName,
-                    style: Fontstyle.artistN(18),
+                    style: Fontstyle.artistN(
+                      18,
+                      FontWeight.normal,
+                      Colors.black,
+                    ),
                     overflow: TextOverflow.fade,
                     maxLines: 5,
                   ),
@@ -74,7 +78,7 @@ class _MyexpensiontileFolderState extends State<MyexpensiontileFolder> {
               childrenPadding: EdgeInsets.all(0),
               title: Text(
                 "Song: ${widget.folderSong.length}",
-                style: Fontstyle.songN(18, Colors.black),
+                style: Fontstyle.songN(18, Colors.black, FontWeight.normal),
               ),
               children: [SongContaner(buildCondition: widget.folderName)],
             ),

@@ -212,9 +212,9 @@ class PlayerController extends GetxController {
       }
     }
 
-    for (var a in folderSong.entries) {
-      // print("${a.key}: ${a.value.length}");
-    }
+    // for (var a in folderSong.entries) {
+    //   // print("${a.key}: ${a.value.length}");
+    // }
   }
 
   // Pre-fetch artwork for all cached songs (optional)

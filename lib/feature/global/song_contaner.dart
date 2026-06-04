@@ -73,7 +73,7 @@ class _SongContanerState extends State<SongContaner> {
               return SongSkeleton();
             }
             final artwork = artworkSnapshot.data;
-            final duration = controller.formatDuration(song.duration!.toInt());
+            //   final duration = controller.formatDuration(song.duration!.toInt());
             final Color badgeColor =
                 ["mp3", "aac"].contains(song.fileExtension.toLowerCase())
                 ? Colors.white70
@@ -128,57 +128,70 @@ class _SongContanerState extends State<SongContaner> {
                     Expanded(
                       flex: 1,
                       child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        spacing: 2,
                         children: [
                           Text(
-                            song.title,
-                            style: Fontstyle.songN(16, Colors.black),
+                            song.title.capitalize!,
+                            style: Fontstyle.songN(
+                              18,
+                              Colors.black,
+                              FontWeight.normal,
+                            ),
                             overflow: TextOverflow.fade,
                             maxLines: 1,
-                            softWrap: true,
+                            softWrap: false,
                           ),
                           Text(
                             song.album!,
                             // song.artist != '<unknown>'
                             //     ? song.album!
                             //     : 'Unknown Album',
-                            style: Fontstyle.AlbamN(12, FontWeight.normal),
+                            style: Fontstyle.AlbamN(
+                              12,
+                              FontWeight.w400,
+                              Colors.black54,
+                            ),
                             overflow: TextOverflow.fade,
-                            maxLines: 1,
-                            softWrap: true,
-                          ),
-                          Text(
-                            //song.artist ?? 'Unknown Artist',
-                            song.artist!,
-                            // = '<unknown>'
-                            //     ? song.artist!
-                            //     : "Unknown Artist",
-                            style: Fontstyle.artistN(12),
-                            overflow: TextOverflow.ellipsis,
                             maxLines: 1,
                             softWrap: false,
                           ),
-                          Row(
-                            children: [
-                              Text(
-                                duration,
-                                style: Fontstyle.AlbamN(12, FontWeight.normal),
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 1,
-                                softWrap: false,
-                              ),
-                              Text(
-                                " / ${song.fileExtension}",
-                                style: Fontstyle.AlbamN(12, FontWeight.normal),
-                              ),
-                            ],
+
+                          Text(
+                            //song.artist ?? 'Unknown Artist',
+                            song.artist!.toUpperCase(),
+                            // = '<unknown>'
+                            //     ? song.artist!
+                            //     : "Unknown Artist",
+                            style: Fontstyle.artistN(
+                              12,
+                              FontWeight.normal,
+                              Colors.black,
+                            ),
+                            overflow: TextOverflow.fade,
+                            maxLines: 1,
+                            softWrap: false,
                           ),
+                          // Row(
+                          //   children: [
+                          //     Text(
+                          //       duration,
+                          //       style: Fontstyle.AlbamN(12, FontWeight.normal),
+                          //       overflow: TextOverflow.ellipsis,
+                          //       maxLines: 1,
+                          //       softWrap: false,
+                          //     ),
+                          //     Text(
+                          //       " / ${song.fileExtension}",
+                          //       style: Fontstyle.AlbamN(12, FontWeight.normal),
+                          //     ),
+                          //   ],
+                          // ),
                         ],
                       ),
                     ),
 
-                    //Expanded(child: Container()),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
 

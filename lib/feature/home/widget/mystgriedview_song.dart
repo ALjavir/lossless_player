@@ -88,15 +88,23 @@ class _MystgriedviewState extends State<MystgriedviewSong> {
                             child: Stack(
                               alignment: AlignmentDirectional.bottomCenter,
                               children: [
-                                artwork != null
-                                    ? Image.memory(artwork, fit: BoxFit.cover)
-                                    : Center(
-                                        child: Icon(
-                                          Icons.music_note,
-                                          size: 40,
-                                          color: Colors.black,
+                                Card(
+                                  shadowColor: Colors.black45,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(0),
+                                  ),
+                                  color: Colors.white,
+                                  margin: EdgeInsets.zero,
+                                  child: artwork != null
+                                      ? Image.memory(artwork, fit: BoxFit.cover)
+                                      : Center(
+                                          child: Icon(
+                                            Icons.music_note,
+                                            size: 40,
+                                            color: Colors.black,
+                                          ),
                                         ),
-                                      ),
+                                ),
                                 Container(
                                   decoration: BoxDecoration(
                                     color: Colors.black45,
@@ -106,7 +114,11 @@ class _MystgriedviewState extends State<MystgriedviewSong> {
                                     song.title.capitalizeFirst!,
                                     maxLines: 1,
                                     overflow: TextOverflow.visible,
-                                    style: Fontstyle.songN(18, Colors.white),
+                                    style: Fontstyle.songN(
+                                      18,
+                                      Colors.white,
+                                      FontWeight.normal,
+                                    ),
                                     textAlign: TextAlign.center,
                                   ),
                                 ),

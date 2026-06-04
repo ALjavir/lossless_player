@@ -33,10 +33,7 @@ class _TabvarState extends State<Tabvar> {
             spacing: 10,
             children: [
               Image.asset("lib/assets/icon/logo.png", scale: 4),
-              Text(
-                "Lossless Music",
-                style: Fontstyle.appbarfont(26, Colors.black),
-              ),
+              Text("Lossless Music", style: Fontstyle.appbarfont(26)),
             ],
           ),
           actions: [
@@ -62,12 +59,9 @@ class _TabvarState extends State<Tabvar> {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Icon(Icons.music_note),
+                    Icon(Icons.album),
                     SizedBox(width: 6),
-                    Text(
-                      "Song.",
-                      style: Fontstyle.thambalfont(18, FontWeight.normal),
-                    ),
+                    Text("Song.", style: Fontstyle.navfont(18)),
                   ],
                 ),
               ),
@@ -76,10 +70,7 @@ class _TabvarState extends State<Tabvar> {
                   children: [
                     Icon(Icons.people),
                     SizedBox(width: 6),
-                    Text(
-                      "Artist.",
-                      style: Fontstyle.thambalfont(18, FontWeight.normal),
-                    ),
+                    Text("Artist.", style: Fontstyle.navfont(18)),
                   ],
                 ),
               ),
@@ -88,10 +79,7 @@ class _TabvarState extends State<Tabvar> {
                   children: [
                     Icon(Icons.folder),
                     SizedBox(width: 6),
-                    Text(
-                      "Folder.",
-                      style: Fontstyle.thambalfont(18, FontWeight.normal),
-                    ),
+                    Text("Folder.", style: Fontstyle.navfont(18)),
                   ],
                 ),
               ),
@@ -103,7 +91,7 @@ class _TabvarState extends State<Tabvar> {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 12),
               child: SongHomePage(),
-            ), // Added Homepage here
+            ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 12),
               child: ArtistPage(),
