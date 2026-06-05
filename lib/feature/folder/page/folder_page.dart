@@ -63,10 +63,30 @@ class _FolderState extends State<Folder> {
                     quality: 1000,
                   ),
                   builder: (context, artworkSnapshot) {
-                    return MyexpensiontileFolder(
-                      folderName: folderName,
-                      folderSong: folderSong,
-                      folderImage: artworkSnapshot.data,
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          alignment: Alignment.center,
+                          width: 45,
+                          height: 45,
+                          margin: const EdgeInsets.symmetric(vertical: 12),
+                          color: Colors.black,
+                          child: Text(
+                            (index + 1).toString(),
+                            style: Fontstyle.artistN(
+                              22,
+                              FontWeight.bold,
+                              Colors.white,
+                            ),
+                          ),
+                        ),
+                        MyexpensiontileFolder(
+                          folderName: folderName,
+                          folderSong: folderSong,
+                          folderImage: artworkSnapshot.data,
+                        ),
+                      ],
                     );
                   },
                 );

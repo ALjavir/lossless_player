@@ -96,51 +96,15 @@ class _TabvarState extends State<Tabvar> {
               padding: EdgeInsets.symmetric(horizontal: 12),
               child: ArtistPage(),
             ),
-            Folder(),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 12),
+              child: Folder(),
+            ),
             // Genres(),
             //Test()
           ],
         ),
       ),
-    );
-  }
-
-  Future<void> showdiolog() async {
-    return showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          scrollable: true,
-          title: Text('Folder'),
-          content: Obx(() {
-            // Wrap ListView.builder in Obx to update when RxList changes
-            return ListView.builder(
-              shrinkWrap: true,
-              itemCount: controller.selectedFolders.length,
-              itemBuilder: (context, index) {
-                return ListTile(title: Text(controller.selectedFolders[index]));
-              },
-            );
-          }),
-          actions: [
-            FloatingActionButton.small(
-              onPressed: () async {
-                // Let user pick a folder and add it to the list
-                String? folderPath = await FilePicker.getDirectoryPath();
-                if (folderPath != null) {
-                  controller.addFolder(folderPath);
-                  Navigator.pop(context); // Add folder via controller
-                }
-              },
-              backgroundColor: Colors.black,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(30),
-              ),
-              child: Icon(Icons.add, color: Colors.white),
-            ),
-          ],
-        );
-      },
     );
   }
 }

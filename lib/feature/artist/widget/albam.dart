@@ -40,10 +40,10 @@ class _AlbamState extends State<Albam> {
             tilePadding: EdgeInsets.symmetric(horizontal: 10, vertical: 2),
             title: Text(
               widget.albamName[index].capitalizeFirst!,
-              style: Fontstyle.songN(
-                16,
-                expandedItems.contains(index) ? Colors.black : Colors.black38,
-                FontWeight.normal,
+              style: Fontstyle.AlbamN(
+                18,
+                FontWeight.w400,
+                expandedItems.contains(index) ? Colors.black87 : Colors.black38,
               ),
             ),
 

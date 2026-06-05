@@ -45,20 +45,20 @@ class _MyExpensionTileState extends State<MyexpensiontileArtist> {
       () => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Card(
-            shadowColor: Colors.black45,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(0),
-            ),
-            color: Colors.white,
-            margin: EdgeInsets.zero,
-            child: Stack(
-              alignment: AlignmentGeometry.bottomRight,
-              children: [
-                Row(
-                  spacing: 10,
-                  children: [
-                    artwork != null
+          Stack(
+            alignment: AlignmentGeometry.bottomRight,
+            children: [
+              Row(
+                spacing: 10,
+                children: [
+                  Card(
+                    shadowColor: Colors.black45,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(0),
+                    ),
+                    color: Colors.white,
+                    margin: EdgeInsets.zero,
+                    child: artwork != null
                         ? Image.memory(
                             artwork,
                             fit: BoxFit.fitHeight,
@@ -76,48 +76,48 @@ class _MyExpensionTileState extends State<MyexpensiontileArtist> {
                               ),
                             ),
                           ),
-
-                    ///expriment
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            widget.artistName.toUpperCase(),
-                            style: Fontstyle.artistN(
-                              18,
-                              FontWeight.normal,
-                              Colors.black,
-                            ),
-                            overflow: TextOverflow.fade,
-                            maxLines: 1,
-                          ),
-                          Text(
-                            'Album: ${widget.albumNum} / Song: ${widget.songNum}',
-                            style: Fontstyle.AlbamN(
-                              14,
-                              FontWeight.normal,
-                              Colors.black,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-                IconButton(
-                  onPressed: () {
-                    isExpanded.value = !isExpanded.value;
-                  },
-                  icon: Icon(
-                    isExpanded.value
-                        ? Icons.keyboard_arrow_down
-                        : Icons.keyboard_arrow_up,
-                    size: 30,
                   ),
+
+                  ///expriment
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          widget.artistName.toUpperCase(),
+                          style: Fontstyle.artistN(
+                            18,
+                            FontWeight.normal,
+                            Colors.black,
+                          ),
+                          overflow: TextOverflow.fade,
+                          maxLines: 1,
+                        ),
+                        Text(
+                          'Album: ${widget.albumNum} / Song: ${widget.songNum}',
+                          style: Fontstyle.AlbamN(
+                            14,
+                            FontWeight.normal,
+                            Colors.black,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              IconButton(
+                onPressed: () {
+                  isExpanded.value = !isExpanded.value;
+                },
+                icon: Icon(
+                  isExpanded.value
+                      ? Icons.keyboard_arrow_down
+                      : Icons.keyboard_arrow_up,
+                  size: 30,
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
 
           AnimatedSize(

@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lossless_player/style/font.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -244,38 +245,69 @@ class PlayerController extends GetxController {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
+          backgroundColor: Colors.white,
           scrollable: true,
-          title: Text('Folder'),
+          title: Text('Folder', style: Fontstyle.navfont(28)),
           content: Obx(() {
             return ListView.builder(
               shrinkWrap: true,
               itemCount: selectedFolders.length,
               itemBuilder: (context, index) {
-                return ListTile(title: Text(selectedFolders[index]));
+                final showIndex = index + 1;
+                return Padding(
+                  padding: const EdgeInsets.only(bottom: 10),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    spacing: 5,
+                    children: [
+                      Text(
+                        "${showIndex.toString()}.",
+                        style: Fontstyle.AlbamN(
+                          18,
+                          FontWeight.w600,
+                          Colors.black,
+                        ),
+                      ),
+                      Expanded(
+                        child: Text(
+                          selectedFolders[index],
+                          style: Fontstyle.AlbamN(
+                            18,
+                            FontWeight.w400,
+                            Colors.black,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                );
               },
             );
           }),
           actions: [
             FloatingActionButton.small(
               onPressed: () async {
-                // Use a try-catch block here because FilePicker can be buggy on some Android versions
                 try {
                   String? folderPath = await FilePicker.getDirectoryPath();
 
                   if (folderPath != null) {
-                    // FIX 3: Force update the UI
                     addFolder(folderPath);
                     Navigator.pop(context);
                   }
                 } catch (e) {
                   print("Error picking folder: $e");
-                  // Optional: Show a snackbar saying "Could not pick folder"
                 }
               },
+
               backgroundColor: Colors.black,
+              elevation: 0,
+              highlightElevation: 0,
+              focusElevation: 0,
+              hoverElevation: 0,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(30),
               ),
+
               child: Icon(Icons.add, color: Colors.white),
             ),
           ],
