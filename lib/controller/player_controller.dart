@@ -40,11 +40,7 @@ class PlayerController extends GetxController {
     }
   }
 
-  // Fetch songs from selected folders and cache them
-  // Fetch songs from selected folders and cache them
   Future<void> fetchSongs() async {
-    // --- FIX 1: Ask for permission before fetching ---
-    // This prevents the "Application doesn't have access to the library" crash
     var status = await Permission.audio.status;
     if (!status.isGranted) {
       status = await Permission.storage.status;
@@ -62,8 +58,6 @@ class PlayerController extends GetxController {
         ignoreCase: true,
       );
 
-      // --- FIX 2: Show ALL songs if no folder is picked ---
-      // If selectedFolders is empty, show everything. Otherwise, filter.
       List<SongModel> filteredSongs;
 
       if (selectedFolders.isEmpty) {
@@ -102,9 +96,6 @@ class PlayerController extends GetxController {
     //     "-------------------------------------------------This is inside Artist");
     List<String> TempArtist = <String>[];
     for (var song in cachedSongs) {
-      // if (!TempArtist.contains(song.artist)) {
-      //   TempArtist.add(song.artist!);
-      // }
       TempArtist.add(song.artist!);
     }
 
@@ -115,9 +106,6 @@ class PlayerController extends GetxController {
       for (var song in cachedSongs) {
         //print(song.artist);
         if (unArtistName == song.artist) {
-          // String unArtistName = song.artist == "<unknown>"
-          //     ? "Unknown Album"
-          //     : song.album ?? "Unknown Album";
           artistNpic.putIfAbsent(unArtistName, () => song.id);
           artisNalbum.putIfAbsent(unArtistName, () => <String>[].obs);
           if (!artisNalbum[unArtistName]!.contains(song.album)) {
@@ -247,7 +235,7 @@ class PlayerController extends GetxController {
         return AlertDialog(
           backgroundColor: Colors.white,
           scrollable: true,
-          title: Text('Folder', style: Fontstyle.navfont(28)),
+          title: Text('Folder', style: Fontstyle.navfont(28, Colors.black)),
           content: Obx(() {
             return ListView.builder(
               shrinkWrap: true,
@@ -264,7 +252,7 @@ class PlayerController extends GetxController {
                         "${showIndex.toString()}.",
                         style: Fontstyle.AlbamN(
                           18,
-                          FontWeight.w600,
+                          FontWeight.w400,
                           Colors.black,
                         ),
                       ),
@@ -273,7 +261,7 @@ class PlayerController extends GetxController {
                           selectedFolders[index],
                           style: Fontstyle.AlbamN(
                             18,
-                            FontWeight.w400,
+                            FontWeight.w300,
                             Colors.black,
                           ),
                         ),

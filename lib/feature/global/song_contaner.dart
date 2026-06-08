@@ -150,8 +150,8 @@ class _SongContanerState extends State<SongContaner> {
                             //     : 'Unknown Album',
                             style: Fontstyle.AlbamN(
                               12,
-                              FontWeight.w400,
-                              Colors.black54,
+                              FontWeight.w300,
+                              Colors.black,
                             ),
                             overflow: TextOverflow.fade,
                             maxLines: 1,

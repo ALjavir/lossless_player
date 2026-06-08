@@ -12,9 +12,13 @@ class Fontstyle {
     );
   }
 
-  static TextStyle navfont(double fontSize) {
+  static TextStyle navfont(double fontSize, Color color) {
     return GoogleFonts.roboto(
-      textStyle: TextStyle(fontSize: fontSize, fontWeight: FontWeight.normal),
+      textStyle: TextStyle(
+        fontSize: fontSize,
+        fontWeight: FontWeight.normal,
+        color: color,
+      ),
     );
   }
 
@@ -23,7 +27,7 @@ class Fontstyle {
     FontWeight fontWeight,
     Color color,
   ) {
-    return GoogleFonts.elmsSans(
+    return GoogleFonts.cinzel(
       textStyle: TextStyle(
         fontSize: fontsize,
         fontWeight: fontWeight,
@@ -33,7 +37,7 @@ class Fontstyle {
   }
 
   static TextStyle songN(double Fontsize, Color color, FontWeight fontWeight) {
-    return GoogleFonts.sura(
+    return GoogleFonts.lato(
       textStyle: TextStyle(
         fontSize: Fontsize,
         color: color,
@@ -43,7 +47,7 @@ class Fontstyle {
   }
 
   static TextStyle AlbamN(double Fontsize, FontWeight FontWeight, Color color) {
-    return GoogleFonts.robotoSlab(
+    return GoogleFonts.aleo(
       textStyle: TextStyle(
         fontSize: Fontsize,
         fontWeight: FontWeight,

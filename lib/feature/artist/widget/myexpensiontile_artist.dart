@@ -45,79 +45,89 @@ class _MyExpensionTileState extends State<MyexpensiontileArtist> {
       () => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Stack(
-            alignment: AlignmentGeometry.bottomRight,
-            children: [
-              Row(
-                spacing: 10,
-                children: [
-                  Card(
-                    shadowColor: Colors.black45,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(0),
-                    ),
-                    color: Colors.white,
-                    margin: EdgeInsets.zero,
-                    child: artwork != null
-                        ? Image.memory(
-                            artwork,
-                            fit: BoxFit.fitHeight,
-                            width: 150,
-                            height: 150,
-                          )
-                        : SizedBox(
-                            width: 150,
-                            height: 150,
-                            child: Center(
-                              child: Icon(
-                                Icons.music_note,
-                                size: 40,
-                                color: Colors.black,
+          InkWell(
+            onTap: () {
+              isExpanded.value = !isExpanded.value;
+            },
+            child: Stack(
+              alignment: AlignmentGeometry.bottomRight,
+              children: [
+                Row(
+                  spacing: 10,
+                  children: [
+                    Card(
+                      elevation: 5,
+
+                      shadowColor: Colors.black38,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(0),
+                      ),
+                      color: Colors.white,
+                      margin: EdgeInsets.zero,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(0),
+                          border: Border.all(color: Colors.black12),
+                        ),
+                        child: artwork != null
+                            ? Image.memory(
+                                artwork,
+                                fit: BoxFit.fitHeight,
+                                width: 150,
+                                height: 150,
+                              )
+                            : SizedBox(
+                                width: 150,
+                                height: 150,
+                                child: Center(
+                                  child: Icon(
+                                    Icons.music_note,
+                                    size: 40,
+                                    color: Colors.black,
+                                  ),
+                                ),
                               ),
+                      ),
+                    ),
+
+                    ///expriment
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            widget.artistName.toUpperCase(),
+                            softWrap: true,
+                            maxLines: 2,
+                            style: Fontstyle.artistN(
+                              18,
+
+                              FontWeight.normal,
+                              Colors.black,
+                            ),
+                            overflow: TextOverflow.fade,
+                          ),
+                          Text(
+                            'Album: ${widget.albumNum} / Song: ${widget.songNum}',
+                            style: Fontstyle.AlbamN(
+                              14,
+                              FontWeight.normal,
+                              Colors.black,
                             ),
                           ),
-                  ),
-
-                  ///expriment
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          widget.artistName.toUpperCase(),
-                          style: Fontstyle.artistN(
-                            18,
-                            FontWeight.normal,
-                            Colors.black,
-                          ),
-                          overflow: TextOverflow.fade,
-                          maxLines: 1,
-                        ),
-                        Text(
-                          'Album: ${widget.albumNum} / Song: ${widget.songNum}',
-                          style: Fontstyle.AlbamN(
-                            14,
-                            FontWeight.normal,
-                            Colors.black,
-                          ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                ],
-              ),
-              IconButton(
-                onPressed: () {
-                  isExpanded.value = !isExpanded.value;
-                },
-                icon: Icon(
+                  ],
+                ),
+                Icon(
                   isExpanded.value
                       ? Icons.keyboard_arrow_down
                       : Icons.keyboard_arrow_up,
                   size: 30,
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
 
           AnimatedSize(

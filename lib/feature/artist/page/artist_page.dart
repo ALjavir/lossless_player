@@ -3,7 +3,7 @@
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_sticky_header/flutter_sticky_header.dart';
+
 import 'package:get/get.dart';
 import 'package:lossless_player/controller/player_controller.dart';
 import 'package:lossless_player/style/font.dart';
@@ -55,10 +55,10 @@ class _ArtistPageState extends State<ArtistPage> {
                   width: 45,
                   height: 45,
                   margin: const EdgeInsets.symmetric(vertical: 12),
-                  color: Colors.black,
+                  color: Colors.black87,
                   child: Text(
                     currentLetter,
-                    style: Fontstyle.artistN(22, FontWeight.bold, Colors.white),
+                    style: Fontstyle.navfont(22, Colors.white),
                   ),
                 ),
 

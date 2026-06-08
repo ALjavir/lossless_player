@@ -29,10 +29,13 @@ class _SongHomePageState extends State<SongHomePage> {
               context: context,
               builder: (context) => AlertDialog(
                 backgroundColor: Colors.white70,
-                title: Text('Permission', style: TextStyle(fontSize: 30)),
+                title: Text(
+                  'Permission',
+                  style: Fontstyle.navfont(28, Colors.black),
+                ),
                 content: Text(
                   'Please select an audio folder.',
-                  style: TextStyle(fontSize: 20),
+                  style: Fontstyle.AlbamN(18, FontWeight.w300, Colors.black),
                 ),
                 actions: [
                   TextButton(
@@ -115,7 +118,10 @@ class _SongHomePageState extends State<SongHomePage> {
                   spacing: 5,
                   children: [
                     Icon(Icons.new_releases_outlined, size: 30),
-                    Text("Recently added.", style: Fontstyle.navfont(18)),
+                    Text(
+                      "Recently added.",
+                      style: Fontstyle.navfont(18, Colors.black),
+                    ),
                   ],
                 ),
                 SongContaner(buildCondition: 'full'),

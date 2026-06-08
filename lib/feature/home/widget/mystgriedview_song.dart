@@ -70,7 +70,7 @@ class _MystgriedviewState extends State<MystgriedviewSong> {
                       builder: (context, artworkSnapshot) {
                         final artwork = artworkSnapshot.data;
                         return Padding(
-                          padding: const EdgeInsets.fromLTRB(0, 0, 10, 8),
+                          padding: const EdgeInsets.only(right: 10),
                           child: InkWell(
                             onTap: () {
                               List<SongModel> currentPlaylist =
@@ -89,6 +89,7 @@ class _MystgriedviewState extends State<MystgriedviewSong> {
                               alignment: AlignmentDirectional.bottomCenter,
                               children: [
                                 Card(
+                                  elevation: 2,
                                   shadowColor: Colors.black45,
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(0),
@@ -133,19 +134,26 @@ class _MystgriedviewState extends State<MystgriedviewSong> {
               ),
             ),
           ),
-          ClipRRect(
-            borderRadius: BorderRadius.circular(30),
-            child: BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 8.0, sigmaY: 8.0),
-              child: IconButton(
-                icon: const Icon(
-                  Icons.shuffle_outlined,
-                  size: 40,
-                  color: Colors.white,
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(30),
+              border: Border.all(color: Colors.black26),
+            ),
+
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(30),
+              child: BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 8.0, sigmaY: 8.0),
+                child: IconButton(
+                  icon: const Icon(
+                    Icons.shuffle_outlined,
+                    size: 40,
+                    color: Colors.white,
+                  ),
+                  onPressed: () {
+                    songs.shuffle();
+                  },
                 ),
-                onPressed: () {
-                  songs.shuffle();
-                },
               ),
             ),
           ),

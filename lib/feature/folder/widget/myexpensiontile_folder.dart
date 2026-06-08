@@ -36,6 +36,7 @@ class _MyexpensiontileFolderState extends State<MyexpensiontileFolder> {
           spacing: 10,
           children: [
             Card(
+              elevation: 5,
               shadowColor: Colors.black45,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(0),

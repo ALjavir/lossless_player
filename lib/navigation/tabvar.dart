@@ -1,4 +1,3 @@
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lossless_player/controller/player_controller.dart';
@@ -24,8 +23,6 @@ class _TabvarState extends State<Tabvar> {
         appBar: AppBar(
           elevation: 0,
           scrolledUnderElevation: 0,
-          //toolbarHeight: 80,
-          //bottomOpacity: 0.5,
           backgroundColor: Colors.white,
 
           title: Row(
@@ -46,7 +43,6 @@ class _TabvarState extends State<Tabvar> {
           ],
           bottom: TabBar(
             isScrollable: true,
-            //   padding: EdgeInsetsGeometry.only(bottom: 10),
             tabAlignment: TabAlignment.center,
             unselectedLabelColor: Colors.black26,
             labelColor: Colors.black,
@@ -61,7 +57,7 @@ class _TabvarState extends State<Tabvar> {
                   children: [
                     Icon(Icons.album),
                     SizedBox(width: 6),
-                    Text("Song.", style: Fontstyle.navfont(18)),
+                    Text("Song.", style: Fontstyle.navfont(18, Colors.black)),
                   ],
                 ),
               ),
@@ -70,7 +66,7 @@ class _TabvarState extends State<Tabvar> {
                   children: [
                     Icon(Icons.people),
                     SizedBox(width: 6),
-                    Text("Artist.", style: Fontstyle.navfont(18)),
+                    Text("Artist.", style: Fontstyle.navfont(18, Colors.black)),
                   ],
                 ),
               ),
@@ -79,7 +75,7 @@ class _TabvarState extends State<Tabvar> {
                   children: [
                     Icon(Icons.folder),
                     SizedBox(width: 6),
-                    Text("Folder.", style: Fontstyle.navfont(18)),
+                    Text("Folder.", style: Fontstyle.navfont(18, Colors.black)),
                   ],
                 ),
               ),
