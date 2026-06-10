@@ -2,6 +2,7 @@ import 'dart:math';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:get/state_manager.dart';
 import 'package:get/utils.dart';
 import 'package:just_audio/just_audio.dart';
@@ -34,16 +35,17 @@ class _AudioplayerPageState extends State<AudioplayerPage> {
   @override
   void initState() {
     super.initState();
+
+    print("AudioplayerPage created: ${widget.initialIndex}");
     _audioPlayer = AudioPlayer();
     _currentIndex = widget.initialIndex.obs;
+
     _loadSong();
 
     // Listen to player state for UI updates
     _audioPlayer.playerStateStream.listen((state) {
       if (mounted) {
-        setState(() {
-          _isPlaying.value = state.playing;
-        });
+        _isPlaying.value = state.playing;
       }
       // Auto-play next song when current finishes
       if (state.processingState == ProcessingState.completed) {
@@ -56,6 +58,9 @@ class _AudioplayerPageState extends State<AudioplayerPage> {
     try {
       await _audioPlayer.setFilePath(widget.songs[_currentIndex.value].data);
       _audioPlayer.play();
+      print(
+        "This is from inside widegt _loadSong: ${widget.songs[_currentIndex.value].title}---------------------------------------------------------------------------------------------------",
+      );
     } catch (e) {
       print("Error loading audio: $e");
     }
@@ -67,6 +72,9 @@ class _AudioplayerPageState extends State<AudioplayerPage> {
 
       _loadSong();
     }
+    print(
+      "This is from inside widegt _playPrevious: ${widget.songs[_currentIndex.value].title}---------------------------------------------------------------------------------------------------",
+    );
   }
 
   @override
@@ -91,7 +99,7 @@ class _AudioplayerPageState extends State<AudioplayerPage> {
     } else if (_isShuffle.value) {
       // If Shuffle is on, pick a random song
 
-      _currentIndex = Random().nextInt(widget.songs.length).obs;
+      _currentIndex.value = Random().nextInt(widget.songs.length);
 
       _loadSong();
     } else {
@@ -108,34 +116,41 @@ class _AudioplayerPageState extends State<AudioplayerPage> {
         _loadSong();
       }
     }
+    print(
+      "This is from inside widegt _playNext: ${widget.songs[_currentIndex.value].title}---------------------------------------------------------------------------------------------------",
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    final currentSong = widget.songs[_currentIndex.value];
-    final Color badgeColor =
-        ["mp3", "aac"].contains(currentSong.fileExtension.toLowerCase())
-        ? Colors.white70
-        : Colors.transparent;
-
-    final text = currentSong.title;
-
-    final textPainter = TextPainter(
-      text: TextSpan(
-        text: text,
-        style: Fontstyle.artistN(28, FontWeight.w600, Colors.white),
-      ),
-      maxLines: 1,
-      textDirection: TextDirection.ltr,
-    )..layout();
-    final availableWidth = MediaQuery.of(context).size.width - 40;
-    final isOverflowing = textPainter.width > availableWidth;
-
     return Scaffold(
       backgroundColor: Colors.transparent,
 
-      body: Obx(
-        () => Stack(
+      body: Obx(() {
+        final currentSong = widget.songs[_currentIndex.value];
+        final Color badgeColor =
+            ["mp3", "aac"].contains(currentSong.fileExtension.toLowerCase())
+            ? Colors.white70
+            : Colors.transparent;
+
+        final text = currentSong.title;
+
+        final textPainter = TextPainter(
+          text: TextSpan(
+            text: text,
+            style: Fontstyle.artistN(28, FontWeight.w600, Colors.white),
+          ),
+          maxLines: 1,
+          textDirection: TextDirection.ltr,
+        )..layout();
+        final availableWidth = MediaQuery.of(context).size.width - 40;
+        final isOverflowing = textPainter.width > availableWidth;
+
+        print(
+          "This is from inside widegt build: ${currentSong.title}---------------------------------------------------------------------------------------------------",
+        );
+
+        return Stack(
           children: [
             SizedBox(
               width: double.maxFinite,
@@ -156,7 +171,7 @@ class _AudioplayerPageState extends State<AudioplayerPage> {
             Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(15, 40, 15, 20),
+                  padding: const EdgeInsets.fromLTRB(15, 40, 15, 10),
                   child: Column(
                     spacing: 10,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -382,13 +397,11 @@ class _AudioplayerPageState extends State<AudioplayerPage> {
                               Icons.shuffle,
                               // Change color to Pink if active, Grey if inactive
                               color: _isShuffle.value
-                                  ? Colors.black38
-                                  : Colors.white,
+                                  ? Colors.white
+                                  : Colors.black38,
                             ),
                             onPressed: () {
-                              setState(() {
-                                _isShuffle.toggle();
-                              });
+                              _isShuffle.toggle();
                             },
                           ),
 
@@ -397,7 +410,7 @@ class _AudioplayerPageState extends State<AudioplayerPage> {
                             icon: Icon(
                               Icons.skip_previous_rounded,
                               size: 40,
-                              color: Colors.black,
+                              color: Colors.white,
                             ),
                             onPressed: _playPrevious,
                           ),
@@ -440,7 +453,7 @@ class _AudioplayerPageState extends State<AudioplayerPage> {
                             icon: Icon(
                               Icons.skip_next_rounded,
                               size: 40,
-                              color: Colors.black,
+                              color: Colors.white,
                             ),
                             onPressed: _playNext,
                           ),
@@ -455,16 +468,14 @@ class _AudioplayerPageState extends State<AudioplayerPage> {
                                   : Colors.white,
                             ),
                             onPressed: () {
-                              setState(() {
-                                // Cycle through modes: Off -> All -> One -> Off
-                                if (_loopMode == LoopMode.off) {
-                                  _loopMode = LoopMode.all;
-                                } else if (_loopMode == LoopMode.all) {
-                                  _loopMode = LoopMode.one;
-                                } else {
-                                  _loopMode = LoopMode.off;
-                                }
-                              });
+                              // Cycle through modes: Off -> All -> One -> Off
+                              if (_loopMode == LoopMode.off) {
+                                _loopMode = LoopMode.all;
+                              } else if (_loopMode == LoopMode.all) {
+                                _loopMode = LoopMode.one;
+                              } else {
+                                _loopMode = LoopMode.off;
+                              }
                             },
                           ),
                         ],
@@ -473,47 +484,40 @@ class _AudioplayerPageState extends State<AudioplayerPage> {
                   ),
                 ),
                 if (_currentIndex.value < widget.songs.length - 1)
-                  Expanded(
-                    child: Card(
-                      elevation: 5,
+                  Stack(
+                    clipBehavior: Clip.none,
+                    children: [
+                      InkWell(
+                        onTap: () {
+                          showModalBottomSheet(
+                            context: context,
+                            isScrollControlled: true,
+                            backgroundColor: Colors.black87,
+                            builder: (_) => QueueBottomSheet(
+                              songs: widget.songs.obs,
+                              currentIndex: widget.initialIndex.obs,
+                            ),
+                          );
+                        },
+                        child: Container(
+                          margin: const EdgeInsets.only(top: 6),
+                          padding: const EdgeInsets.fromLTRB(15, 15, 15, 20),
+                          color: Colors.black54,
+                          // decoration: BoxDecoration(
+                          //   border: Border.all(color: Colors.white24),
 
-                      // shadowColor: Colors.white24,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(0),
-                      ),
-                      color: Colors.black54,
-                      margin: EdgeInsets.zero,
-
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 15,
-                          vertical: 0,
-                        ),
-                        child: InkWell(
-                          onTap: () {
-                            showModalBottomSheet(
-                              context: context,
-                              isScrollControlled: true,
-                              backgroundColor: Colors.black87,
-                              builder: (_) => QueueBottomSheet(
-                                songs: widget.songs,
-                                currentIndex: widget.initialIndex,
-                              ),
-                            );
-                          },
+                          // ),
                           child: Row(
-                            spacing: 10,
                             children: [
                               Expanded(
                                 child: Text(
                                   widget.songs[_currentIndex.value + 1].title,
+                                  overflow: TextOverflow.ellipsis,
                                   style: Fontstyle.songN(
-                                    16,
+                                    18,
                                     Colors.white,
                                     FontWeight.normal,
                                   ),
-                                  softWrap: true,
-                                  overflow: TextOverflow.ellipsis,
                                 ),
                               ),
                               const Icon(
@@ -524,56 +528,29 @@ class _AudioplayerPageState extends State<AudioplayerPage> {
                           ),
                         ),
                       ),
-                    ),
+
+                      Positioned(
+                        left: 15,
+                        top: 0,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Colors.black,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          padding: const EdgeInsets.symmetric(horizontal: 6),
+                          child: Text(
+                            "NEXT",
+                            style: Fontstyle.navfont(14, Colors.white),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
               ],
             ),
           ],
-        ),
-      ),
-      // bottomSheet: Material(
-      //   color: Colors.transparent,
-      //   child: Container(
-      //     color: Colors.transparent,
-      //     child: Padding(
-      //       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 40),
-      //       child: InkWell(
-      //         onTap: () {
-      //           showModalBottomSheet(
-      //             context: context,
-      //             isScrollControlled: true,
-      //             backgroundColor: Colors.black87,
-      //             builder: (_) => QueueBottomSheet(
-      //               songs: widget.songs,
-      //               currentIndex: widget.initialIndex,
-      //             ),
-      //           );
-      //         },
-      //         child: Row(
-      //           spacing: 10,
-      //           children: [
-      //             Expanded(
-      //               child: Text(
-      //                 widget.songs[_currentIndex.value + 1].title,
-      //                 style: Fontstyle.songN(
-      //                   14,
-      //                   Colors.white,
-      //                   FontWeight.normal,
-      //                 ),
-      //                 softWrap: true,
-      //                 overflow: TextOverflow.ellipsis,
-      //               ),
-      //             ),
-      //             const Icon(
-      //               Icons.keyboard_arrow_up_sharp,
-      //               color: Colors.white,
-      //             ),
-      //           ],
-      //         ),
-      //       ),
-      //     ),
-      //   ),
-      // ),
+        );
+      }),
     );
   }
 }

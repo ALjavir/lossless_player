@@ -14,10 +14,14 @@ class SongHomePage extends StatefulWidget {
   State<SongHomePage> createState() => _SongHomePageState();
 }
 
-class _SongHomePageState extends State<SongHomePage> {
+class _SongHomePageState extends State<SongHomePage>
+    with AutomaticKeepAliveClientMixin {
   final PlayerController controller = Get.put(PlayerController());
   @override
+  bool get wantKeepAlive => true;
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Scaffold(
       backgroundColor: Colors.white,
       body: Obx(() {

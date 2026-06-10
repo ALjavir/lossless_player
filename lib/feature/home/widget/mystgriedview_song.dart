@@ -73,13 +73,9 @@ class _MystgriedviewState extends State<MystgriedviewSong> {
                           padding: const EdgeInsets.only(right: 10),
                           child: InkWell(
                             onTap: () {
-                              List<SongModel> currentPlaylist =
-                                  controller.cachedSongs;
-
-                              // 2. Navigate
                               Get.to(
                                 () => AudioplayerPage(
-                                  songs: currentPlaylist,
+                                  songs: songs.toList(),
                                   initialIndex: index,
                                 ),
                                 transition: Transition.downToUp,
@@ -152,6 +148,8 @@ class _MystgriedviewState extends State<MystgriedviewSong> {
                   ),
                   onPressed: () {
                     songs.shuffle();
+                    songs.refresh();
+                    print("this is song at 0 index ${songs[0].title}");
                   },
                 ),
               ),

@@ -17,7 +17,10 @@ class ArtistPage extends StatefulWidget {
   State<ArtistPage> createState() => _ArtistPageState();
 }
 
-class _ArtistPageState extends State<ArtistPage> {
+class _ArtistPageState extends State<ArtistPage>
+    with AutomaticKeepAliveClientMixin {
+  @override
+  bool get wantKeepAlive => true;
   final PlayerController controller = Get.put(PlayerController());
   late List<MapEntry<String, int>> sortedArtistNpic;
 
@@ -30,6 +33,7 @@ class _ArtistPageState extends State<ArtistPage> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Scaffold(
       backgroundColor: Colors.white,
       body: ListView.builder(

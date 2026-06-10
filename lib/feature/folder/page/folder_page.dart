@@ -14,10 +14,13 @@ class Folder extends StatefulWidget {
   State<Folder> createState() => _FolderState();
 }
 
-class _FolderState extends State<Folder> {
+class _FolderState extends State<Folder> with AutomaticKeepAliveClientMixin {
+  @override
+  bool get wantKeepAlive => true;
   final PlayerController controller = Get.put(PlayerController());
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Scaffold(
       backgroundColor: Colors.white,
       body: Obx(() {

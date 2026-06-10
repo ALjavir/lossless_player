@@ -1,12 +1,17 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/src/extension_navigation.dart';
+import 'package:get/get_navigation/src/routes/transitions_type.dart';
+import 'package:get/get_utils/src/extensions/string_extensions.dart';
+import 'package:get/state_manager.dart';
+import 'package:just_audio/just_audio.dart';
+import 'package:lossless_player/feature/global/audioPlayer_page.dart';
 import 'package:lossless_player/style/font.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
-class QueueBottomSheet extends StatelessWidget {
-  final List<SongModel> songs;
-  final int currentIndex;
+class QueueBottomSheet extends StatefulWidget {
+  final RxList<SongModel> songs;
+  final RxInt currentIndex;
 
   const QueueBottomSheet({
     super.key,
@@ -15,7 +20,13 @@ class QueueBottomSheet extends StatelessWidget {
   });
 
   @override
+  State<QueueBottomSheet> createState() => _QueueBottomSheetState();
+}
+
+class _QueueBottomSheetState extends State<QueueBottomSheet> {
+  @override
   Widget build(BuildContext context) {
+    final songList = widget.songs;
     return SizedBox(
       height: MediaQuery.of(context).size.height * 0.7,
       child: Column(
@@ -26,7 +37,7 @@ class QueueBottomSheet extends StatelessWidget {
             width: 40,
             height: 4,
             decoration: BoxDecoration(
-              color: Colors.grey,
+              color: Colors.white,
               borderRadius: BorderRadius.circular(20),
             ),
           ),
@@ -40,39 +51,58 @@ class QueueBottomSheet extends StatelessWidget {
 
           Expanded(
             child: ListView.builder(
-              itemCount: songs.length,
+              itemCount: songList.length,
               itemBuilder: (context, index) {
-                final song = songs[index];
+                final song = widget.songs[index];
 
-                final isCurrent = index == currentIndex;
+                final isCurrent = index == widget.currentIndex;
 
-                return ListTile(
-                  selected: isCurrent,
-                  selectedTileColor: Colors.white10,
+                return InkWell(
+                  onTap: () {
+                    Get.back();
 
-                  leading: isCurrent
-                      ? const Icon(Icons.graphic_eq, color: Colors.green)
-                      : Text(
-                          "${index + 1}",
-                          style: Fontstyle.navfont(
-                            22,
-                            //FontWeight.bold,
-                            Colors.white,
+                    Get.to(
+                      () => AudioplayerPage(
+                        songs: widget.songs,
+                        initialIndex: index,
+                      ),
+                      transition: Transition.downToUp,
+                    );
+                  },
+                  child: ListTile(
+                    selected: isCurrent,
+                    selectedTileColor: Colors.black12,
+
+                    leading: isCurrent
+                        ? const Icon(Icons.graphic_eq, color: Colors.green)
+                        : Text(
+                            "${index + 1}",
+                            style: Fontstyle.navfont(
+                              22,
+                              //FontWeight.bold,
+                              Colors.white,
+                            ),
                           ),
-                        ),
 
-                  title: Text(
-                    song.title,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                      color: isCurrent ? Colors.green : Colors.white,
+                    title: Text(
+                      song.title.capitalizeFirst!,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: Fontstyle.songN(
+                        16,
+                        isCurrent ? Colors.green : Colors.white,
+                        FontWeight.w500,
+                      ),
                     ),
-                  ),
 
-                  subtitle: Text(
-                    song.artist ?? "Unknown Artist",
-                    style: const TextStyle(color: Colors.white54),
+                    subtitle: Text(
+                      song.artist ?? "Unknown Artist",
+                      style: Fontstyle.AlbamN(
+                        16,
+                        FontWeight.w500,
+                        Colors.white54,
+                      ),
+                    ),
                   ),
                 );
               },
