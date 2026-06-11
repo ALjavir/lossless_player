@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:get/get_navigation/src/routes/transitions_type.dart';
 import 'package:get/get_utils/src/extensions/string_extensions.dart';
 import 'package:get/state_manager.dart';
-import 'package:just_audio/just_audio.dart';
 import 'package:lossless_player/feature/global/audioPlayer_page.dart';
 import 'package:lossless_player/style/font.dart';
 import 'package:on_audio_query/on_audio_query.dart';
