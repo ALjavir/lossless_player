@@ -15,9 +15,14 @@ A high-fidelity offline music player built with Flutter, designed to handle loca
 
 ## 📸 Screenshots
 
-| Home Page | Artist View | Folder Selection | Player Interface |
-|:---:|:---:|:---:|:---:|
-| <img src="https://github.com/user-attachments/assets/2c66dcf4-6b02-459a-8831-531f1d6d58c1" width="200"> | <img src="https://github.com/user-attachments/assets/9f517c8e-0f6a-4081-bf38-76a9b0d5710a" width="200"> | <img src="https://github.com/user-attachments/assets/1c269c60-c74c-4019-a765-21600fd18a91" width="200"> | <img src="https://github.com/user-attachments/assets/7335bf02-6a76-426f-8a15-f7bd3fb3bd66" width="200"> |
+| Library Access & Source Management | Music Discovery & Library | Music Player & Queue Management |
+|:---:|:---:|:---:|
+| <img src="https://github.com/user-attachments/assets/72507212-6b01-4754-b032-7f095aeccf44" width="300"> | <img src="https://github.com/user-attachments/assets/70acbaef-704b-4060-b835-f9ab2c5ad770" width="300"> | <img src="https://github.com/user-attachments/assets/3887e8a7-2b9b-477d-99e8-0689049f4594" width="300"> |
+
+| Artist & Album Library | Folder-Based Library |
+|:---:|:---:|
+| <img src="https://github.com/user-attachments/assets/5e8fdada-5d15-456c-9227-f55f56c7ceb2" width="300"> | <img src="https://github.com/user-attachments/assets/697a45e0-7bf7-47b7-85df-8205656089a3" width="300"> |
+
 
 ---
 
