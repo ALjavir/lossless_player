@@ -13,6 +13,12 @@ A high-fidelity offline music player built with Flutter, designed to handle loca
   </a>
 </p>
 
+## 📸 Screenshots
+
+| Home Page | Artist View | Folder Selection | Player Interface |
+|:---:|:---:|:---:|:---:|
+| <img src="https://github.com/user-attachments/assets/2c66dcf4-6b02-459a-8831-531f1d6d58c1" width="200"> | <img src="https://github.com/user-attachments/assets/9f517c8e-0f6a-4081-bf38-76a9b0d5710a" width="200"> | <img src="https://github.com/user-attachments/assets/1c269c60-c74c-4019-a765-21600fd18a91" width="200"> | <img src="https://github.com/user-attachments/assets/7335bf02-6a76-426f-8a15-f7bd3fb3bd66" width="200"> |
+
 ---
 
 ## ✨ Features
@@ -42,17 +48,6 @@ A complete playback interface featuring:
 * **Playback Controls:** Play, Pause, Next, Previous.
 * **Queue Management:** Shuffle and Repeat (Repeat One / Repeat All) modes.
 * **Seek Bar:** Real-time progress slider.
-
----
-
-## 📸 Screenshots
-
-| Home Page | Artist View | Folder Selection | Player Interface |
-|:---:|:---:|:---:|:---:|
-| <img src="https://github.com/user-attachments/assets/2c66dcf4-6b02-459a-8831-531f1d6d58c1" width="200"> | <img src="https://github.com/user-attachments/assets/9f517c8e-0f6a-4081-bf38-76a9b0d5710a" width="200"> | <img src="https://github.com/user-attachments/assets/1c269c60-c74c-4019-a765-21600fd18a91" width="200"> | <img src="https://github.com/user-attachments/assets/7335bf02-6a76-426f-8a15-f7bd3fb3bd66" width="200"> |
-
-
-
 
 ---
 
