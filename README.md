@@ -4,10 +4,14 @@ A high-fidelity offline music player built with Flutter, designed to handle loca
 
 > **⚠️ Note:** This is a legacy project created during my early days of learning Flutter. The file structure and code quality reflect a learning curve and may not follow current best practices or clean architecture patterns. It is archived here for portfolio and demonstration purposes.
 
-## 📺 Demo Video
+## 📱 App Preview
 
-Check out the app in action on YouTube:
-[**Watch the Demo Video Here**](https://youtu.be/Yrn-QVs4RyA)
+### 🎥 Live Demo
+<p align="center">
+  <a href="https://youtu.be/HTaZW5G1Fu4">
+    <img src="https://github.com/user-attachments/assets/0cb6f782-18c7-45c8-aee7-3b7f97a21258" width="600">
+  </a>
+</p>
 
 ---
 
