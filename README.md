@@ -8,8 +8,8 @@ A high-fidelity offline music player built with Flutter, designed to handle loca
 
 ### 🎥 Live Demo
 <p align="center">
-  <a href="https://youtu.be/HTaZW5G1Fu4">
-    <img src="https://github.com/user-attachments/assets/0cb6f782-18c7-45c8-aee7-3b7f97a21258" width="600">
+  <a href="https://youtu.be/_JXjAi11lCk?si=pbnxb6mFdawykuVt">
+    <img src="https://github.com/user-attachments/assets/11fedd33-c6c8-42ca-b6b8-f6fe9f29b05a" width="600">
   </a>
 </p>
 
